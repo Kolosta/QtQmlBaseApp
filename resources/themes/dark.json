@@ -1,0 +1,12 @@
+{
+  "name": "Dark",
+  "background": "#1e1e1e",
+  "surface": "#2d2d2d",
+  "surfaceHover": "#3d3d3d",
+  "primary": "#0d7377",
+  "primaryHover": "#14a0a5",
+  "text": "#ffffff",
+  "textSecondary": "#b0b0b0",
+  "border": "#3d3d3d",
+  "accent": "#4a9eff"
+}

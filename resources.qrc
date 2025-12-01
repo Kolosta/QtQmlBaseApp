@@ -1,0 +1,15 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+  <qresource prefix="/">
+    <file>resources/themes/default.json</file>
+    <file>resources/themes/dark.json</file>
+    <file>resources/themes/light.json</file>
+    <file>resources/themes/grey.json</file>
+    <file>resources/themes/muted_green.json</file>
+    <file>resources/themes/blue.json</file>
+    <file>resources/themes/sepia.json</file>
+    <file>resources/themes/snow.json</file>
+    <file>resources/themes/arctic.json</file>
+    <file>resources/icons/app_icon.svg</file>
+  </qresource>
+</RCC>

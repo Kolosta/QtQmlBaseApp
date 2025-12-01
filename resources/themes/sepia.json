@@ -1,0 +1,12 @@
+{
+  "name": "Sepia",
+  "background": "#f4f1ea",
+  "surface": "#fef9f3",
+  "surfaceHover": "#ebe6dd",
+  "primary": "#8b6914",
+  "primaryHover": "#a07c1a",
+  "text": "#3d2f1f",
+  "textSecondary": "#6d5d4d",
+  "border": "#d4c4a8",
+  "accent": "#c19a6b"
+}

@@ -1,0 +1,12 @@
+{
+  "name": "Muted Green",
+  "background": "#1a2421",
+  "surface": "#233229",
+  "surfaceHover": "#2d4032",
+  "primary": "#4a7c59",
+  "primaryHover": "#5d9973",
+  "text": "#d4e7d8",
+  "textSecondary": "#8fb897",
+  "border": "#3d5a45",
+  "accent": "#6db583"
+}

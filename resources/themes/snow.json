@@ -1,0 +1,12 @@
+{
+  "name": "Snow",
+  "background": "#f8f9fa",
+  "surface": "#ffffff",
+  "surfaceHover": "#e9ecef",
+  "primary": "#4a90e2",
+  "primaryHover": "#6aa3e8",
+  "text": "#212529",
+  "textSecondary": "#6c757d",
+  "border": "#dee2e6",
+  "accent": "#0066cc"
+}

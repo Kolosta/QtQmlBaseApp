@@ -1,0 +1,12 @@
+{
+  "name": "Arctic",
+  "background": "#e8f4f8",
+  "surface": "#f0f8fa",
+  "surfaceHover": "#d9eff5",
+  "primary": "#006494",
+  "primaryHover": "#0077b6",
+  "text": "#001f3f",
+  "textSecondary": "#4a7c8c",
+  "border": "#b8d8e0",
+  "accent": "#0096c7"
+}
