@@ -37,6 +37,7 @@ set(PROJECT_QML_FILES
     qml/components/SliderField.qml
     qml/components/SegmentedButton.qml
     qml/components/ValueBar.qml
+    qml/components/CustomDialog.qml
 )
 
 qt_add_executable(appQtQmlBaseApp

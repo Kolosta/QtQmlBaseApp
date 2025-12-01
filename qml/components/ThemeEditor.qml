@@ -377,81 +377,102 @@ ColumnLayout {
     }
     
     // Dialogs
-    Dialog {
+    // Dialog {
+    //     id: resetAllDialog
+    //     anchors.centerIn: parent
+    //     title: "Reset All Properties"
+    //     modal: true
+    //     width: 350
+    //     height: 150
+        
+    //     background: Rectangle {
+    //         color: ThemeManager.surface
+    //         border.width: ThemeManager.borderWidth
+    //         border.color: ThemeManager.border
+    //         radius: ThemeManager.radius
+    //     }
+        
+    //     Column {
+    //         anchors.fill: parent
+    //         anchors.margins: 20
+    //         spacing: 20
+            
+    //         Text {
+    //             text: "Are you sure you want to reset all theme properties to their original values?"
+    //             color: ThemeManager.text
+    //             wrapMode: Text.WordWrap
+    //             width: parent.width
+    //         }
+            
+    //         Row {
+    //             anchors.right: parent.right
+    //             spacing: 10
+                
+    //             Button {
+    //                 text: "Cancel"
+    //                 onClicked: resetAllDialog.close()
+                    
+    //                 background: Rectangle {
+    //                     color: parent.pressed ? ThemeManager.surfaceHover : ThemeManager.surface
+    //                     border.width: ThemeManager.borderWidth
+    //                     border.color: ThemeManager.border
+    //                     radius: ThemeManager.radiusSmall
+    //                 }
+                    
+    //                 contentItem: Text {
+    //                     text: parent.text
+    //                     color: ThemeManager.text
+    //                     horizontalAlignment: Text.AlignHCenter
+    //                     verticalAlignment: Text.AlignVCenter
+    //                 }
+    //             }
+                
+    //             Button {
+    //                 text: "Reset All"
+    //                 onClicked: {
+    //                     ThemeManager.resetAllProperties()
+    //                     root.refreshAllPropertyEditors()
+    //                     resetAllDialog.close()
+    //                 }
+                    
+    //                 background: Rectangle {
+    //                     color: parent.pressed ? ThemeManager.primaryHover : ThemeManager.primary
+    //                     border.width: ThemeManager.borderWidth
+    //                     border.color: ThemeManager.primary
+    //                     radius: ThemeManager.radiusSmall
+    //                 }
+                    
+    //                 contentItem: Text {
+    //                     text: parent.text
+    //                     color: "#ffffff"
+    //                     horizontalAlignment: Text.AlignHCenter
+    //                     verticalAlignment: Text.AlignVCenter
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+
+    CustomDialog {
         id: resetAllDialog
-        anchors.centerIn: parent
-        title: "Reset All Properties"
-        modal: true
-        width: 350
-        height: 150
         
-        background: Rectangle {
-            color: ThemeManager.surface
-            border.width: ThemeManager.borderWidth
-            border.color: ThemeManager.border
-            radius: ThemeManager.radius
-        }
+        dialogTitle: "Reset All Properties"
+        text: "Are you sure you want to reset all theme properties? This cannot be undone."
         
-        Column {
-            anchors.fill: parent
-            anchors.margins: 20
-            spacing: 20
-            
-            Text {
-                text: "Are you sure you want to reset all theme properties to their original values?"
-                color: ThemeManager.text
-                wrapMode: Text.WordWrap
-                width: parent.width
-            }
-            
-            Row {
-                anchors.right: parent.right
-                spacing: 10
-                
-                Button {
-                    text: "Cancel"
-                    onClicked: resetAllDialog.close()
-                    
-                    background: Rectangle {
-                        color: parent.pressed ? ThemeManager.surfaceHover : ThemeManager.surface
-                        border.width: ThemeManager.borderWidth
-                        border.color: ThemeManager.border
-                        radius: ThemeManager.radiusSmall
-                    }
-                    
-                    contentItem: Text {
-                        text: parent.text
-                        color: ThemeManager.text
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-                    }
-                }
-                
-                Button {
-                    text: "Reset All"
-                    onClicked: {
-                        ThemeManager.resetAllProperties()
-                        root.refreshAllPropertyEditors()
-                        resetAllDialog.close()
-                    }
-                    
-                    background: Rectangle {
-                        color: parent.pressed ? ThemeManager.primaryHover : ThemeManager.primary
-                        border.width: ThemeManager.borderWidth
-                        border.color: ThemeManager.primary
-                        radius: ThemeManager.radiusSmall
-                    }
-                    
-                    contentItem: Text {
-                        text: parent.text
-                        color: "#ffffff"
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-                    }
-                }
-            }
+        acceptButtonText: "Reset All"
+        cancelButtonText: "Cancel"
+
+        // -> Empêche la fermeture par clic extérieur
+        // -> Ajoute l'effet visuel "pulse" si on clique dehors
+        strictMode: true 
+
+        onAccepted: {
+            ThemeManager.resetAllProperties()
+            root.refreshAllPropertyEditors()
+            console.log("Action validée (Clic bouton ou Touche Entrée)")
         }
     }
+
     
     FileDialog {
         id: importFileDialog
