@@ -11,5 +11,7 @@
     <file>resources/themes/snow.json</file>
     <file>resources/themes/arctic.json</file>
     <file>resources/icons/app_icon.svg</file>
+    <file>resources/icons/chevron-right.svg</file>
+    <file>resources/icons/chevron-down.svg</file>
   </qresource>
 </RCC>

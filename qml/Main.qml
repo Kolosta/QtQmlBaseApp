@@ -18,14 +18,14 @@ ApplicationWindow {
     }
     
     header: MenuBar {
-        onPreferencesRequested: preferencesDialog.show()
+        onPreferencesRequested: preferencesWindow.show()
     }
     
     MainView {
         anchors.fill: parent
     }
     
-    PreferencesDialog {
-        id: preferencesDialog
+    PreferencesWindow {
+        id: preferencesWindow
     }
 }

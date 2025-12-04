@@ -25,19 +25,38 @@ set(PROJECT_SOURCES
 
 # Fichiers QML
 set(PROJECT_QML_FILES
+    # Root
     qml/Main.qml
+    # Views
     qml/views/MainView.qml
-    qml/components/MenuBar.qml
-    qml/components/PreferencesDialog.qml
-    qml/components/ThemeEditor.qml
-    qml/components/ColorPicker.qml
-    qml/components/PropertyEditor.qml
-    qml/components/CustomColorPicker.qml
-    qml/components/ColorWheel.qml
-    qml/components/SliderField.qml
-    qml/components/SegmentedButton.qml
-    qml/components/ValueBar.qml
-    qml/components/CustomDialog.qml
+
+    # Common components
+    qml/components/common/MenuBar.qml
+    qml/components/common/CustomDialog.qml
+    qml/components/common/ScrollableContentArea.qml
+
+    # Input components
+    qml/components/inputs/NumberField.qml
+    qml/components/inputs/SliderField.qml
+    qml/components/inputs/SegmentedButton.qml
+
+    # Color pickers
+    qml/components/pickers/ColorPicker.qml
+    qml/components/pickers/CustomColorPicker.qml
+    qml/components/pickers/ColorWheel.qml
+    qml/components/pickers/ValueBar.qml
+
+    # Preferences components
+    qml/components/preferences/PreferencesWindow.qml
+    qml/components/preferences/preferencesTabs/Interface.qml
+    qml/components/preferences/preferencesTabs/ThemeSelector.qml
+    qml/components/preferences/preferencesTabs/ThemeEditor.qml
+    qml/components/preferences/preferencesTabs/PropertyEditor.qml
+    qml/components/preferences/preferencesTabs/ComponentsLib.qml
+    
+    # Presentation components
+    qml/components/presentation/ComponentSection.qml
+    qml/components/presentation/ComponentSubSection.qml
 )
 
 qt_add_executable(appQtQmlBaseApp

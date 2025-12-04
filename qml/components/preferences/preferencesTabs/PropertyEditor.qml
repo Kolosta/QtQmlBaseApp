@@ -167,36 +167,43 @@ Rectangle {
         }
     }
     
-    // Number editor
+    // Number editor - Nouveau composant NumberField
     Component {
         id: numberEditor
         
-        SpinBox {
-            from: 0
-            to: 1000
+        NumberField {
             value: root.propertyValue || 0
-            editable: true
             
-            background: Rectangle {
-                color: ThemeManager.surface
-                border.width: ThemeManager.borderWidth
-                border.color: ThemeManager.border
-                radius: ThemeManager.radiusSmall
+            // Configuration par défaut pour les propriétés de thème
+            // Vous pouvez ajuster ces valeurs selon vos besoins
+            decimals: 0  // Entiers par défaut
+            stepSize: 1
+            hasMin: true
+            minValue: 0
+            hasMax: true
+            maxValue: getMaxForProperty()
+            
+            // Déterminer le max selon la propriété
+            function getMaxForProperty() {
+                // Espacements et dimensions
+                if (root.propertyKey.includes("spacing") || 
+                    root.propertyKey === "menuBarHeight") {
+                    return 100
+                }
+                // Radius
+                if (root.propertyKey.includes("radius")) {
+                    return 50
+                }
+                // Border width
+                if (root.propertyKey === "borderWidth") {
+                    return 10
+                }
+                // Par défaut
+                return 1000
             }
             
-            contentItem: TextInput {
-                text: parent.value
-                color: ThemeManager.text
-                font.pixelSize: ThemeManager.fontSizeMedium
-                horizontalAlignment: Qt.AlignHCenter
-                verticalAlignment: Qt.AlignVCenter
-                readOnly: !parent.editable
-                validator: parent.validator
-                inputMethodHints: Qt.ImhDigitsOnly
-            }
-            
-            onValueModified: {
-                root.valueChanged(value)
+            onValueModified: function(newValue) {
+                root.valueChanged(newValue)
                 root.updateModifiedStatus()
             }
         }
