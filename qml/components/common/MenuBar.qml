@@ -5,12 +5,12 @@ import QtQmlBaseApp.Core
 
 Rectangle {
     id: root
-    height: 40
-    color: ThemeManager.surface.color.surfPrimary
+    height: ThemeManager.components.menuBar.height.scaled
+    color: ThemeManager.color.surface.primary.defaultColor
     
     signal preferencesRequested()
     
-    // Global shortcuts handler
+    // Global shortcuts
     Shortcut {
         sequence: KeymapManager.getShortcut("file.save")
         onActivated: console.log("Save triggered")
@@ -28,7 +28,8 @@ Rectangle {
     
     Row {
         anchors.fill: parent
-        spacing: ThemeManager.surface.spacingMedium
+        anchors.leftMargin: ThemeManager.spacing.padding.sm.scaled
+        spacing: ThemeManager.spacing.gap.sm.scaled
         
         // File Menu
         Button {
@@ -37,17 +38,22 @@ Rectangle {
             
             background: Rectangle {
                 color: parent.hovered ? 
-                    ThemeManager.surface.color.surfHover :
+                    ThemeManager.color.surface.hover.defaultColor :
                     "transparent"
+                
+                Behavior on color {
+                    ColorAnimation { duration: ThemeManager.transition.duration.fast }
+                }
             }
             
             contentItem: Text {
                 text: parent.text
-                color: ThemeManager.font.color.textPrimary
+                font.family: ThemeManager.font.family.primary
+                font.pixelSize: ThemeManager.font.size.text.md.scaled
+                font.weight: ThemeManager.font.weight.medium
+                color: ThemeManager.color.text.primary.defaultColor
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
-                font.pixelSize: ThemeManager.font.sizeMedium
-                font.weight: ThemeManager.font.weight.medium
             }
             
             onClicked: fileMenu.popup(this, 0, height)
@@ -57,10 +63,10 @@ Rectangle {
                 
                 background: Rectangle {
                     implicitWidth: 250
-                    color: ThemeManager.surface.color.surfPrimary
-                    border.width: ThemeManager.border.widthThin
-                    border.color: ThemeManager.border.color.borderPrimary
-                    radius: ThemeManager.surface.radiusSmall
+                    color: ThemeManager.color.surface.primary.defaultColor
+                    border.width: ThemeManager.border.width.thin.scaled
+                    border.color: ThemeManager.color.border.defaultColor.defaultColor
+                    radius: ThemeManager.border.radius.sm.scaled
                 }
                 
                 MenuItem {
@@ -69,32 +75,38 @@ Rectangle {
                     
                     background: Rectangle {
                         color: parent.highlighted ? 
-                            ThemeManager.surface.color.surfHover :
-                            ThemeManager.surface.color.surfPrimary
+                            ThemeManager.color.surface.hover.defaultColor :
+                            ThemeManager.color.surface.primary.defaultColor
+                        
+                        Behavior on color {
+                            ColorAnimation { duration: ThemeManager.transition.duration.fast }
+                        }
                     }
                     
                     contentItem: RowLayout {
-                        spacing: ThemeManager.surface.spacingMedium
+                        spacing: ThemeManager.spacing.padding.md.scaled
                         
                         Text {
                             Layout.fillWidth: true
                             text: parent.parent.text
-                            color: ThemeManager.font.color.textPrimary
-                            font.pixelSize: ThemeManager.font.sizeMedium
+                            font.family: ThemeManager.font.family.primary
+                            font.pixelSize: ThemeManager.font.size.text.md.scaled
+                            color: ThemeManager.color.text.primary.defaultColor
                         }
                         
                         Text {
                             text: KeymapManager.getShortcutDisplay("file.save")
-                            color: ThemeManager.font.color.textSecondary
-                            font.pixelSize: ThemeManager.font.sizeSmall
+                            font.family: ThemeManager.font.family.mono
+                            font.pixelSize: ThemeManager.font.size.text.sm.scaled
+                            color: ThemeManager.color.text.secondary.defaultColor
                         }
                     }
                 }
                 
                 MenuSeparator {
                     contentItem: Rectangle {
-                        implicitHeight: ThemeManager.border.widthThin
-                        color: ThemeManager.border.color.borderPrimary
+                        implicitHeight: ThemeManager.border.width.thin.scaled
+                        color: ThemeManager.color.border.defaultColor.defaultColor
                     }
                 }
                 
@@ -104,24 +116,30 @@ Rectangle {
                     
                     background: Rectangle {
                         color: parent.highlighted ? 
-                            ThemeManager.surface.color.surfHover : 
-                            ThemeManager.surface.color.surfPrimary
+                            ThemeManager.color.surface.hover.defaultColor : 
+                            ThemeManager.color.surface.primary.defaultColor
+                        
+                        Behavior on color {
+                            ColorAnimation { duration: ThemeManager.transition.duration.fast }
+                        }
                     }
                     
                     contentItem: RowLayout {
-                        spacing: ThemeManager.surface.spacingMedium
+                        spacing: ThemeManager.spacing.padding.md.scaled
                         
                         Text {
                             Layout.fillWidth: true
                             text: parent.parent.text
-                            color: ThemeManager.font.color.textPrimary
-                            font.pixelSize: ThemeManager.font.sizeMedium
+                            font.family: ThemeManager.font.family.primary
+                            font.pixelSize: ThemeManager.font.size.text.md.scaled
+                            color: ThemeManager.color.text.primary.defaultColor
                         }
                         
                         Text {
                             text: KeymapManager.getShortcutDisplay("file.quit")
-                            color: ThemeManager.font.color.textSecondary
-                            font.pixelSize: ThemeManager.font.sizeSmall
+                            font.family: ThemeManager.font.family.mono
+                            font.pixelSize: ThemeManager.font.size.text.sm.scaled
+                            color: ThemeManager.color.text.secondary.defaultColor
                         }
                     }
                 }
@@ -135,17 +153,22 @@ Rectangle {
             
             background: Rectangle {
                 color: parent.hovered ? 
-                    ThemeManager.surface.color.surfHover :
+                    ThemeManager.color.surface.hover.defaultColor :
                     "transparent"
+                
+                Behavior on color {
+                    ColorAnimation { duration: ThemeManager.transition.duration.fast }
+                }
             }
             
             contentItem: Text {
                 text: parent.text
-                color: ThemeManager.font.color.textPrimary
+                font.family: ThemeManager.font.family.primary
+                font.pixelSize: ThemeManager.font.size.text.md.scaled
+                font.weight: ThemeManager.font.weight.medium
+                color: ThemeManager.color.text.primary.defaultColor
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
-                font.pixelSize: ThemeManager.font.sizeMedium
-                font.weight: ThemeManager.font.weight.medium
             }
             
             onClicked: editMenu.popup(this, 0, height)
@@ -155,10 +178,10 @@ Rectangle {
                 
                 background: Rectangle {
                     implicitWidth: 250
-                    color: ThemeManager.surface.color.surfPrimary
-                    border.width: ThemeManager.border.widthThin
-                    border.color: ThemeManager.border.color.borderPrimary
-                    radius: ThemeManager.surface.radiusSmall
+                    color: ThemeManager.color.surface.primary.defaultColor
+                    border.width: ThemeManager.border.width.thin.scaled
+                    border.color: ThemeManager.color.border.defaultColor.defaultColor
+                    radius: ThemeManager.border.radius.sm.scaled
                 }
                 
                 MenuItem {
@@ -170,24 +193,30 @@ Rectangle {
                     
                     background: Rectangle {
                         color: parent.highlighted ? 
-                            ThemeManager.surface.color.surfHover : 
-                            ThemeManager.surface.color.surfPrimary
+                            ThemeManager.color.surface.hover.defaultColor : 
+                            ThemeManager.color.surface.primary.defaultColor
+                        
+                        Behavior on color {
+                            ColorAnimation { duration: ThemeManager.transition.duration.fast }
+                        }
                     }
                     
                     contentItem: RowLayout {
-                        spacing: ThemeManager.surface.spacingMedium
+                        spacing: ThemeManager.spacing.padding.md.scaled
                         
                         Text {
                             Layout.fillWidth: true
                             text: parent.parent.text
-                            color: ThemeManager.font.color.textPrimary
-                            font.pixelSize: ThemeManager.font.sizeMedium
+                            font.family: ThemeManager.font.family.primary
+                            font.pixelSize: ThemeManager.font.size.text.md.scaled
+                            color: ThemeManager.color.text.primary.defaultColor
                         }
                         
                         Text {
                             text: KeymapManager.getShortcutDisplay("edit.preferences")
-                            color: ThemeManager.font.color.textSecondary
-                            font.pixelSize: ThemeManager.font.sizeSmall
+                            font.family: ThemeManager.font.family.mono
+                            font.pixelSize: ThemeManager.font.size.text.sm.scaled
+                            color: ThemeManager.color.text.secondary.defaultColor
                         }
                     }
                 }
@@ -195,10 +224,11 @@ Rectangle {
         }
     }
     
+    // Bottom border
     Rectangle {
         anchors.bottom: parent.bottom
         width: parent.width
-        height: ThemeManager.border.widthThin
-        color: ThemeManager.border.color.borderPrimary
+        height: ThemeManager.border.width.thin.scaled
+        color: ThemeManager.color.border.defaultColor.defaultColor
     }
 }

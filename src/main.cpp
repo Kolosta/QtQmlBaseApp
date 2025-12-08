@@ -6,7 +6,7 @@
 
 #include "core/Application.h"
 #include "core/ThemeManager.h"
-#include "core/PreferencesManager.h"
+// #include "core/PreferencesManager.h"
 #include "core/KeymapManager.h"
 #include "models/TimeModel.h"
 #include "models/ThemePropertyModel.h"
@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
     // Create and register singleton instances
     Application *application = new Application(&app);
     // ThemeManager *themeManager = new ThemeManager(&app);
-    PreferencesManager *preferencesManager = new PreferencesManager(&app);
+    // PreferencesManager *preferencesManager = new PreferencesManager(&app);
     KeymapManager *keymapManager = new KeymapManager(&app);
     TimeModel *timeModel = new TimeModel(&app);
 
@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
     // Register types
     qmlRegisterSingletonInstance("QtQmlBaseApp.Core", 1, 0, "Application", application);
     qmlRegisterSingletonInstance("QtQmlBaseApp.Core", 1, 0, "ThemeManager", &themeManager); 
-    qmlRegisterSingletonInstance("QtQmlBaseApp.Core", 1, 0, "PreferencesManager", preferencesManager);
+    // qmlRegisterSingletonInstance("QtQmlBaseApp.Core", 1, 0, "PreferencesManager", preferencesManager);
     qmlRegisterSingletonInstance("QtQmlBaseApp.Core", 1, 0, "KeymapManager", keymapManager);
     qmlRegisterSingletonInstance("QtQmlBaseApp.Models", 1, 0, "TimeModel", timeModel);
     

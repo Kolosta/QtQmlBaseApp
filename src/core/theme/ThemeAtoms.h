@@ -3,9 +3,9 @@
 
 #include <QObject>
 #include <QColor>
+#include <QJsonObject>
 
-// ===== COLOR PALETTE =====
-// Groupe toutes les couleurs de base
+// Atome de couleurs (toutes les couleurs possibles)
 class ColorAtom : public QObject {
     Q_OBJECT
     
@@ -14,7 +14,7 @@ class ColorAtom : public QObject {
     Q_PROPERTY(QColor bgSecondary MEMBER m_bgSecondary NOTIFY changed)
     Q_PROPERTY(QColor bgTertiary MEMBER m_bgTertiary NOTIFY changed)
     
-    // Surface (States)
+    // Surface States
     Q_PROPERTY(QColor surfPrimary MEMBER m_surfPrimary NOTIFY changed)
     Q_PROPERTY(QColor surfSecondary MEMBER m_surfSecondary NOTIFY changed)
     Q_PROPERTY(QColor surfHover MEMBER m_surfHover NOTIFY changed)
@@ -56,39 +56,36 @@ class ColorAtom : public QObject {
     Q_PROPERTY(QColor statInfoHover MEMBER m_statInfoHover NOTIFY changed)
 
 public:
-    explicit ColorAtom(QObject *parent = nullptr) : QObject(parent) {}
+    explicit ColorAtom(QObject *parent = nullptr);
     
-    // Valeurs par défaut (Dark Theme Legacy)
+    void loadFromJson(const QJsonObject& json);
+    QJsonObject toJson() const;
+    void copyFrom(const ColorAtom* other);
+    
     QColor m_bgPrimary{"#1e1e1e"};
     QColor m_bgSecondary{"#252525"};
     QColor m_bgTertiary{"#2a2a2a"};
-
     QColor m_surfPrimary{"#2d2d2d"};
     QColor m_surfSecondary{"#353535"};
     QColor m_surfHover{"#3d3d3d"};
     QColor m_surfActive{"#4d4d4d"};
     QColor m_surfDisabled{"#252525"};
-
     QColor m_primBase{"#0d7377"};
     QColor m_primHover{"#14a0a5"};
     QColor m_primActive{"#0a5b5e"};
     QColor m_primDisabled{"#084648"};
-
     QColor m_textPrimary{"#ffffff"};
     QColor m_textSecondary{"#b0b0b0"};
     QColor m_textTertiary{"#808080"};
     QColor m_textDisabled{"#666666"};
     QColor m_textOnPrimary{"#ffffff"};
-
     QColor m_borderPrimary{"#3d3d3d"};
     QColor m_borderSecondary{"#454545"};
     QColor m_borderFocus{"#4a9eff"};
     QColor m_borderDisabled{"#2d2d2d"};
-
     QColor m_accentBase{"#4a9eff"};
     QColor m_accentHover{"#6bb0ff"};
     QColor m_accentActive{"#2a7edf"};
-
     QColor m_statError{"#f44336"};
     QColor m_statErrorHover{"#f55a4e"};
     QColor m_statSuccess{"#4caf50"};
@@ -102,8 +99,7 @@ signals:
     void changed();
 };
 
-// ===== SIZE ATOM =====
-// Dimensions brutes (base 100%)
+// Atome de tailles
 class SizeAtom : public QObject {
     Q_OBJECT
     
@@ -118,7 +114,11 @@ class SizeAtom : public QObject {
     Q_PROPERTY(int xxxlarge MEMBER m_xxxlarge NOTIFY changed)
 
 public:
-    explicit SizeAtom(QObject *parent = nullptr) : QObject(parent) {}
+    explicit SizeAtom(QObject *parent = nullptr);
+    
+    void loadFromJson(const QJsonObject& json);
+    QJsonObject toJson() const;
+    void copyFrom(const SizeAtom* other);
     
     int m_none{0};
     int m_xxsmall{2};
@@ -134,7 +134,7 @@ signals:
     void changed();
 };
 
-// ===== WEIGHT ATOM =====
+// Atome de poids de police
 class WeightAtom : public QObject {
     Q_OBJECT
     
@@ -145,7 +145,7 @@ class WeightAtom : public QObject {
     Q_PROPERTY(int bold MEMBER m_bold CONSTANT)
 
 public:
-    explicit WeightAtom(QObject *parent = nullptr) : QObject(parent) {}
+    explicit WeightAtom(QObject *parent = nullptr);
     
     int m_light{300};
     int m_normal{400};
@@ -154,16 +154,18 @@ public:
     int m_bold{700};
 };
 
-// ===== ANIMATION ATOM (Nouveau) =====
+// Atome d'animation
 class AnimationAtom : public QObject {
     Q_OBJECT
+    
     Q_PROPERTY(int instant MEMBER m_instant CONSTANT)
     Q_PROPERTY(int fast MEMBER m_fast CONSTANT)
     Q_PROPERTY(int normal MEMBER m_normal CONSTANT)
     Q_PROPERTY(int slow MEMBER m_slow CONSTANT)
 
 public:
-    explicit AnimationAtom(QObject *parent = nullptr) : QObject(parent) {}
+    explicit AnimationAtom(QObject *parent = nullptr);
+    
     int m_instant{0};
     int m_fast{50};
     int m_normal{150};
