@@ -15,8 +15,8 @@ Row {
     Text {
         anchors.verticalCenter: parent.verticalCenter
         text: root.label
-        color: ThemeManager.text
-        font.pixelSize: ThemeManager.fontSizeMedium
+        color: ThemeManager.colors.textPrimary
+        font.pixelSize: ThemeManager.sizes.fontSmall
         width: 120
     }
     
@@ -24,9 +24,9 @@ Row {
         width: 80
         height: 30
         color: root.currentColor
-        border.width: ThemeManager.borderWidth
-        border.color: ThemeManager.border
-        radius: ThemeManager.radiusSmall
+        border.width: ThemeManager.sizes.borderThin
+        border.color: ThemeManager.colors.borderPrimary
+        radius: ThemeManager.sizes.radiusSmall
         
         MouseArea {
             anchors.fill: parent
@@ -38,16 +38,16 @@ Row {
         width: 100
         height: 30
         text: root.currentColor.toString()
-        font.pixelSize: ThemeManager.fontSizeSmall
+        font.pixelSize: ThemeManager.sizes.fontSmall
         
         background: Rectangle {
-            color: ThemeManager.surface
-            border.width: ThemeManager.borderWidth
-            border.color: ThemeManager.border
-            radius: ThemeManager.radiusSmall
+            color: ThemeManager.colors.surfacePrimary
+            border.width: ThemeManager.sizes.borderThin
+            border.color: ThemeManager.colors.borderPrimary
+            radius: ThemeManager.sizes.radiusSmall
         }
         
-        color: ThemeManager.text
+        color: ThemeManager.colors.textPrimary
         
         onEditingFinished: {
             if (text.match(/^#[0-9A-Fa-f]{6}$/)) {

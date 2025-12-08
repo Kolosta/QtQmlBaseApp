@@ -10,28 +10,27 @@ Item {
     Column {
         id: content
         width: parent.width
-        spacing: 15
-        topPadding: 20
+        spacing: ThemeManager.sizes.spacingMedium
+        topPadding: ThemeManager.sizes.spacingLarge
         
         Text {
             text: "Theme Selector"
-            font.pixelSize: ThemeManager.fontSizeTitle
+            font.pixelSize: ThemeManager.sizes.fontLarge
             font.bold: true
-            color: ThemeManager.text
+            color: ThemeManager.colors.textPrimary
         }
         
         Text {
             text: "Select a pre-built theme for your application"
-            font.pixelSize: ThemeManager.fontSizeMedium
-            color: ThemeManager.textSecondary
+            font.pixelSize: ThemeManager.sizes.fontMedium
+            color: ThemeManager.colors.textSecondary
         }
         
         Flow {
             id: themeFlow
             width: parent.width
-            spacing: 15
+            spacing: ThemeManager.sizes.spacingMedium
             
-            // Propriété pour forcer le rafraîchissement
             property int refreshCounter: 0
             
             Repeater {
@@ -45,7 +44,6 @@ Item {
                 }
             }
             
-            // Écouter les changements de propriétés du thème
             Connections {
                 target: ThemeManager
                 function onThemePropertiesChanged() {
@@ -54,8 +52,7 @@ Item {
             }
         }
     }
-
-    // Theme Option Component
+    
     component ThemeOption: Rectangle {
         id: themeOptionRoot
         property string themeName: ""
@@ -65,9 +62,9 @@ Item {
         
         width: 140
         height: 110
-        radius: ThemeManager.radius
-        border.width: isSelected ? 3 : ThemeManager.borderWidth
-        border.color: isSelected ? ThemeManager.accent : ThemeManager.border
+        radius: ThemeManager.sizes.radiusMedium
+        border.width: isSelected ? 3 : ThemeManager.sizes.borderThin
+        border.color: isSelected ? ThemeManager.colors.accentBase : ThemeManager.colors.borderPrimary
         
         color: {
             var dummy = refreshTrigger;
@@ -75,16 +72,16 @@ Item {
         }
         
         Behavior on border.width {
-            NumberAnimation { duration: ThemeManager.animationDuration }
+            NumberAnimation { duration: ThemeManager.sizes.animNormal }
         }
         
         Behavior on color {
-            ColorAnimation { duration: ThemeManager.animationDuration }
+            ColorAnimation { duration: ThemeManager.sizes.animNormal }
         }
         
         Column {
             anchors.centerIn: parent
-            spacing: 10
+            spacing: ThemeManager.sizes.spacingMedium
             
             Rectangle {
                 width: 50
@@ -98,7 +95,7 @@ Item {
                 }
                 
                 Behavior on color {
-                    ColorAnimation { duration: ThemeManager.animationDuration }
+                    ColorAnimation { duration: ThemeManager.sizes.animNormal }
                 }
             }
             
@@ -111,7 +108,7 @@ Item {
                     var luminance = (0.299 * bg.r + 0.587 * bg.g + 0.114 * bg.b)
                     return luminance > 0.5 ? "#1e1e1e" : "#ffffff"
                 }
-                font.pixelSize: ThemeManager.fontSizeMedium
+                font.pixelSize: ThemeManager.sizes.fontMedium
                 font.bold: themeOptionRoot.isSelected
             }
         }

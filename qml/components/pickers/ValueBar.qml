@@ -15,9 +15,9 @@ Item {
 
     Rectangle {
         anchors.fill: parent
-        radius: ThemeManager.radiusSmall
-        border.width: ThemeManager.borderWidth
-        border.color: ThemeManager.border
+        radius: ThemeManager.sizes.radiusSmall
+        border.width: ThemeManager.sizes.borderThin
+        border.color: ThemeManager.colors.borderPrimary
 
         gradient: Gradient {
             GradientStop { position: 0.0; color: Qt.hsva(valueBar.hue, valueBar.saturation, 1.0, 1) }

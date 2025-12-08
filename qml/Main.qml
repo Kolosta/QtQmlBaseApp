@@ -11,10 +11,10 @@ ApplicationWindow {
     visible: true
     visibility: Window.Maximized
     title: qsTr("QtQmlBaseApp - Vector Management Application")
-    color: ThemeManager.background
+    color: ThemeManager.background.color.bgPrimary
     
     Behavior on color {
-        ColorAnimation { duration: ThemeManager.animationDuration }
+        ColorAnimation { duration: ThemeManager.sizes.animNormal }
     }
     
     header: MenuBar {

@@ -1,12 +1,29 @@
 {
   "name": "Snow",
-  "background": "#f8f9fa",
-  "surface": "#ffffff",
-  "surfaceHover": "#e9ecef",
-  "primary": "#4a90e2",
-  "primaryHover": "#6aa3e8",
-  "text": "#212529",
-  "textSecondary": "#6c757d",
-  "border": "#dee2e6",
-  "accent": "#0066cc"
+  "version": "2.0",
+  
+  "colors": {
+    "background": {
+      "primary": "#f8f9fa",
+      "secondary": "#D5E0EB"
+    },
+    "surface": {
+      "primary": "#ffffff",
+      "hover": "#e9ecef"
+    },
+    "primary": {
+      "base": "#4a90e2",
+      "hover": "#6aa3e8"
+    },
+    "text": {
+      "primary": "#212529",
+      "secondary": "#6c757d"
+    },
+    "border": {
+      "primary": "#dee2e6"
+    },
+    "accent": {
+      "base": "#0066cc"
+    }
+  }
 }

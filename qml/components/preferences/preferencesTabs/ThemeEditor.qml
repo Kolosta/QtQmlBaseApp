@@ -8,387 +8,366 @@ Item {
     id: root
     implicitHeight: content.height
     
-    // Fonction pour rafraîchir tous les PropertyEditor
-    function refreshAllPropertyEditors() {
-        var items = [
-            backgroundProp, surfaceProp, surfaceHoverProp, primaryProp, primaryHoverProp,
-            textProp, textSecondaryProp, borderProp, accentProp,
-            spacingSmallProp, spacingProp, spacingLargeProp,
-            radiusSmallProp, radiusProp, radiusLargeProp,
-            menuBarHeightProp, borderWidthProp
-        ]
-        
-        for (var i = 0; i < items.length; i++) {
-            if (items[i]) {
-                items[i].updateModifiedStatus()
-            }
-        }
-    }
-    
-    Component.onCompleted: {
-        refreshAllPropertyEditors()
-    }
-    
-    onVisibleChanged: {
-        if (visible) {
-            refreshAllPropertyEditors()
-        }
-    }
-    
     Column {
         id: content
         width: parent.width
         spacing: 0
         topPadding: 20
         
-        // Header with actions
+        // ===== HEADER =====
         RowLayout {
-            width: parent.width
+            width: parent.width - 40
+            anchors.horizontalCenter: parent.horizontalCenter
             spacing: 10
             
             Text {
                 Layout.fillWidth: true
-                text: "Theme Editor - " + ThemeManager.currentTheme.charAt(0).toUpperCase() + ThemeManager.currentTheme.slice(1)
-                font.pixelSize: ThemeManager.fontSizeTitle
-                font.bold: true
-                color: ThemeManager.text
+                text: "Theme Editor - " + ThemeManager.currentTheme
+                font.pixelSize: ThemeManager.font.size.xlarge
+                font.weight: ThemeManager.font.weight.bold
+                color: ThemeManager.font.color.primary
             }
             
             Button {
-                text: "Reset All"
+                text: "Reset"
+                onClicked: ThemeManager.resetToDefaults()
                 
                 background: Rectangle {
-                    color: parent.pressed ? ThemeManager.primaryHover : 
-                           parent.hovered ? ThemeManager.primary : ThemeManager.surface
-                    border.width: ThemeManager.borderWidth
-                    border.color: ThemeManager.border
-                    radius: ThemeManager.radius
+                    color: parent.pressed ? "#c62828" : 
+                           parent.hovered ? "#e53935" : 
+                           ThemeManager.surface.color.primary
+                    border.width: ThemeManager.border.width.thin
+                    border.color: ThemeManager.border.color.primary
+                    radius: ThemeManager.surface.radius.medium
                 }
                 
                 contentItem: Text {
                     text: parent.text
-                    color: ThemeManager.text
+                    color: ThemeManager.font.color.primary
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
-                    font.pixelSize: ThemeManager.fontSizeMedium
+                    font.pixelSize: ThemeManager.font.size.medium
                 }
-                
-                onClicked: resetAllDialog.open()
             }
             
             Button {
-                text: "Import"
+                text: "Export JSON"
+                onClicked: exportDialog.open()
                 
                 background: Rectangle {
-                    color: parent.pressed ? ThemeManager.primaryHover : 
-                           parent.hovered ? ThemeManager.primary : ThemeManager.surface
-                    border.width: ThemeManager.borderWidth
-                    border.color: ThemeManager.border
-                    radius: ThemeManager.radius
+                    color: parent.pressed ? ThemeManager.color.accent : 
+                           parent.hovered ? Qt.lighter(ThemeManager.color.accent, 1.2) : 
+                           ThemeManager.surface.color.primary
+                    border.width: ThemeManager.border.width.thin
+                    border.color: ThemeManager.border.color.primary
+                    radius: ThemeManager.surface.radius.medium
                 }
                 
                 contentItem: Text {
                     text: parent.text
-                    color: ThemeManager.text
+                    color: ThemeManager.font.color.primary
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
-                    font.pixelSize: ThemeManager.fontSizeMedium
+                    font.pixelSize: ThemeManager.font.size.medium
                 }
-                
-                onClicked: importFileDialog.open()
             }
             
             Button {
-                text: "Export"
+                text: "Import JSON"
+                onClicked: importDialog.open()
                 
                 background: Rectangle {
-                    color: parent.pressed ? ThemeManager.primaryHover : 
-                           parent.hovered ? ThemeManager.primary : ThemeManager.surface
-                    border.width: ThemeManager.borderWidth
-                    border.color: ThemeManager.border
-                    radius: ThemeManager.radius
+                    color: parent.hovered ? ThemeManager.surface.color.primary : "transparent"
+                    border.width: ThemeManager.border.width.thin
+                    border.color: ThemeManager.border.color.primary
+                    radius: ThemeManager.surface.radius.medium
                 }
                 
                 contentItem: Text {
                     text: parent.text
-                    color: ThemeManager.text
+                    color: ThemeManager.font.color.primary
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
-                    font.pixelSize: ThemeManager.fontSizeMedium
+                    font.pixelSize: ThemeManager.font.size.medium
                 }
-                
-                onClicked: exportFileDialog.open()
             }
         }
         
-        Item { width: 1; height: 15 } // Spacer
+        Item { width: 1; height: 20 }
         
-        // Colors Section
-        SectionHeader { text: "Colors" }
-
-        PropertyEditor {
-            id: backgroundProp
-            width: parent.width
-            propertyKey: "background"
-            propertyLabel: "Background"
-            propertyValue: ThemeManager.background
-            propertyType: "color"
-            onValueChanged: function(newValue) {
-                ThemeManager.setProperty("background", newValue)
+        // ===== SCALE SLIDER =====
+        ComponentSection {
+            title: "Resolution Scale"
+            collapsed: false
+            
+            Column {
+                width: parent.width
+                spacing: ThemeManager.surface.spacing.medium
+                
+                Row {
+                    width: parent.width
+                    spacing: 10
+                    
+                    Text {
+                        text: "Scale: " + (ThemeManager.scale * 100).toFixed(0) + "%"
+                        color: ThemeManager.font.color.primary
+                        font.pixelSize: ThemeManager.font.size.medium
+                    }
+                }
+                
+                Slider {
+                    id: scaleSlider
+                    width: parent.width
+                    from: 0.5
+                    to: 3.0
+                    value: ThemeManager.scale
+                    stepSize: 0.05
+                    
+                    onMoved: {
+                        ThemeManager.scale = value
+                    }
+                    
+                    background: Rectangle {
+                        x: scaleSlider.leftPadding
+                        y: scaleSlider.topPadding + scaleSlider.availableHeight / 2 - height / 2
+                        width: scaleSlider.availableWidth
+                        height: 4
+                        radius: 2
+                        color: ThemeManager.surface.color.primary
+                        
+                        Rectangle {
+                            width: scaleSlider.visualPosition * parent.width
+                            height: parent.height
+                            color: ThemeManager.color.accent
+                            radius: 2
+                        }
+                    }
+                    
+                    handle: Rectangle {
+                        x: scaleSlider.leftPadding + scaleSlider.visualPosition * (scaleSlider.availableWidth - width)
+                        y: scaleSlider.topPadding + scaleSlider.availableHeight / 2 - height / 2
+                        width: 20
+                        height: 20
+                        radius: 10
+                        color: scaleSlider.pressed ? Qt.darker(ThemeManager.color.accent, 1.2) : ThemeManager.color.accent
+                        border.color: ThemeManager.border.color.primary
+                        border.width: ThemeManager.border.width.thin
+                    }
+                }
             }
-            onResetRequested: function() {
-                ThemeManager.resetProperty("background")
+        }
+        
+        Item { width: 1; height: 20 }
+        
+        // ===== BASE COLORS =====
+        ComponentSection {
+            title: "Base Colors"
+            collapsed: false
+            
+            Column {
+                width: parent.width
+                spacing: ThemeManager.surface.spacing.small
+                
+                ColorPropertyRow {
+                    label: "Primary"
+                    color: ThemeManager.color.primary
+                    onColorChanged: function(newColor) {
+                        ThemeManager.color.primary = newColor
+                    }
+                }
+                
+                ColorPropertyRow {
+                    label: "Secondary"
+                    color: ThemeManager.color.secondary
+                    onColorChanged: function(newColor) {
+                        ThemeManager.color.secondary = newColor
+                    }
+                }
+                
+                ColorPropertyRow {
+                    label: "Tertiary"
+                    color: ThemeManager.color.tertiary
+                    onColorChanged: function(newColor) {
+                        ThemeManager.color.tertiary = newColor
+                    }
+                }
+                
+                ColorPropertyRow {
+                    label: "Accent"
+                    color: ThemeManager.color.accent
+                    onColorChanged: function(newColor) {
+                        ThemeManager.color.accent = newColor
+                    }
+                }
             }
         }
-
-        PropertyEditor {
-            id: surfaceProp
-            width: parent.width
-            propertyKey: "surface"
-            propertyLabel: "Surface"
-            propertyValue: ThemeManager.surface
-            propertyType: "color"
-            onValueChanged: function(newValue) { ThemeManager.setProperty("surface", newValue) }
-            onResetRequested: function() { ThemeManager.resetProperty("surface") }
+        
+        // ===== TEXT COLORS =====
+        ComponentSection {
+            title: "Text Colors"
+            
+            Column {
+                width: parent.width
+                spacing: ThemeManager.surface.spacing.small
+                
+                ColorPropertyRow {
+                    label: "Primary Text"
+                    color: ThemeManager.color.textPrimary
+                    onColorChanged: function(newColor) {
+                        ThemeManager.color.textPrimary = newColor
+                    }
+                }
+                
+                ColorPropertyRow {
+                    label: "Secondary Text"
+                    color: ThemeManager.color.textSecondary
+                    onColorChanged: function(newColor) {
+                        ThemeManager.color.textSecondary = newColor
+                    }
+                }
+                
+                ColorPropertyRow {
+                    label: "Tertiary Text"
+                    color: ThemeManager.color.textTertiary
+                    onColorChanged: function(newColor) {
+                        ThemeManager.color.textTertiary = newColor
+                    }
+                }
+                
+                ColorPropertyRow {
+                    label: "Disabled Text"
+                    color: ThemeManager.color.textDisabled
+                    onColorChanged: function(newColor) {
+                        ThemeManager.color.textDisabled = newColor
+                    }
+                }
+            }
         }
-
-        PropertyEditor {
-            id: surfaceHoverProp
-            width: parent.width
-            propertyKey: "surfaceHover"
-            propertyLabel: "Surface Hover"
-            propertyValue: ThemeManager.surfaceHover
-            propertyType: "color"
-            onValueChanged: function(newValue) { ThemeManager.setProperty("surfaceHover", newValue) }
-            onResetRequested: function() { ThemeManager.resetProperty("surfaceHover") }
+        
+        // ===== STATUS COLORS =====
+        ComponentSection {
+            title: "Status Colors"
+            
+            Column {
+                width: parent.width
+                spacing: ThemeManager.surface.spacing.small
+                
+                ColorPropertyRow {
+                    label: "Success"
+                    color: ThemeManager.color.success
+                    onColorChanged: function(newColor) {
+                        ThemeManager.color.success = newColor
+                    }
+                }
+                
+                ColorPropertyRow {
+                    label: "Warning"
+                    color: ThemeManager.color.warning
+                    onColorChanged: function(newColor) {
+                        ThemeManager.color.warning = newColor
+                    }
+                }
+                
+                ColorPropertyRow {
+                    label: "Error"
+                    color: ThemeManager.color.error
+                    onColorChanged: function(newColor) {
+                        ThemeManager.color.error = newColor
+                    }
+                }
+                
+                ColorPropertyRow {
+                    label: "Info"
+                    color: ThemeManager.color.info
+                    onColorChanged: function(newColor) {
+                        ThemeManager.color.info = newColor
+                    }
+                }
+            }
         }
-
-        PropertyEditor {
-            id: primaryProp
-            width: parent.width
-            propertyKey: "primary"
-            propertyLabel: "Primary"
-            propertyValue: ThemeManager.primary
-            propertyType: "color"
-            onValueChanged: function(newValue) { ThemeManager.setProperty("primary", newValue) }
-            onResetRequested: function() { ThemeManager.resetProperty("primary") }
-        }
-
-        PropertyEditor {
-            id: primaryHoverProp
-            width: parent.width
-            propertyKey: "primaryHover"
-            propertyLabel: "Primary Hover"
-            propertyValue: ThemeManager.primaryHover
-            propertyType: "color"
-            onValueChanged: function(newValue) { ThemeManager.setProperty("primaryHover", newValue) }
-            onResetRequested: function() { ThemeManager.resetProperty("primaryHover") }
-        }
-
-        PropertyEditor {
-            id: textProp
-            width: parent.width
-            propertyKey: "text"
-            propertyLabel: "Text"
-            propertyValue: ThemeManager.text
-            propertyType: "color"
-            onValueChanged: function(newValue) { ThemeManager.setProperty("text", newValue) }
-            onResetRequested: function() { ThemeManager.resetProperty("text") }
-        }
-
-        PropertyEditor {
-            id: textSecondaryProp
-            width: parent.width
-            propertyKey: "textSecondary"
-            propertyLabel: "Text Secondary"
-            propertyValue: ThemeManager.textSecondary
-            propertyType: "color"
-            onValueChanged: function(newValue) { ThemeManager.setProperty("textSecondary", newValue) }
-            onResetRequested: function() { ThemeManager.resetProperty("textSecondary") }
-        }
-
-        PropertyEditor {
-            id: borderProp
-            width: parent.width
-            propertyKey: "border"
-            propertyLabel: "Border"
-            propertyValue: ThemeManager.border
-            propertyType: "color"
-            onValueChanged: function(newValue) { ThemeManager.setProperty("border", newValue) }
-            onResetRequested: function() { ThemeManager.resetProperty("border") }
-        }
-
-        PropertyEditor {
-            id: accentProp
-            width: parent.width
-            propertyKey: "accent"
-            propertyLabel: "Accent"
-            propertyValue: ThemeManager.accent
-            propertyType: "color"
-            onValueChanged: function(newValue) { ThemeManager.setProperty("accent", newValue) }
-            onResetRequested: function() { ThemeManager.resetProperty("accent") }
-        }
-
-        // Spacing Section
-        SectionHeader { text: "Spacing" }
-
-        PropertyEditor {
-            id: spacingSmallProp
-            width: parent.width
-            propertyKey: "spacingSmall"
-            propertyLabel: "Small"
-            propertyValue: ThemeManager.spacingSmall
-            propertyType: "number"
-            onValueChanged: function(newValue) { ThemeManager.setProperty("spacingSmall", newValue) }
-            onResetRequested: function() { ThemeManager.resetProperty("spacingSmall") }
-        }
-
-        PropertyEditor {
-            id: spacingProp
-            width: parent.width
-            propertyKey: "spacing"
-            propertyLabel: "Normal"
-            propertyValue: ThemeManager.spacing
-            propertyType: "number"
-            onValueChanged: function(newValue) { ThemeManager.setProperty("spacing", newValue) }
-            onResetRequested: function() { ThemeManager.resetProperty("spacing") }
-        }
-
-        PropertyEditor {
-            id: spacingLargeProp
-            width: parent.width
-            propertyKey: "spacingLarge"
-            propertyLabel: "Large"
-            propertyValue: ThemeManager.spacingLarge
-            propertyType: "number"
-            onValueChanged: function(newValue) { ThemeManager.setProperty("spacingLarge", newValue) }
-            onResetRequested: function() { ThemeManager.resetProperty("spacingLarge") }
-        }
-
-        // Radius Section
-        SectionHeader { text: "Border Radius" }
-
-        PropertyEditor {
-            id: radiusSmallProp
-            width: parent.width
-            propertyKey: "radiusSmall"
-            propertyLabel: "Small"
-            propertyValue: ThemeManager.radiusSmall
-            propertyType: "number"
-            onValueChanged: function(newValue) { ThemeManager.setProperty("radiusSmall", newValue) }
-            onResetRequested: function() { ThemeManager.resetProperty("radiusSmall") }
-        }
-
-        PropertyEditor {
-            id: radiusProp
-            width: parent.width
-            propertyKey: "radius"
-            propertyLabel: "Normal"
-            propertyValue: ThemeManager.radius
-            propertyType: "number"
-            onValueChanged: function(newValue) { ThemeManager.setProperty("radius", newValue) }
-            onResetRequested: function() { ThemeManager.resetProperty("radius") }
-        }
-
-        PropertyEditor {
-            id: radiusLargeProp
-            width: parent.width
-            propertyKey: "radiusLarge"
-            propertyLabel: "Large"
-            propertyValue: ThemeManager.radiusLarge
-            propertyType: "number"
-            onValueChanged: function(newValue) { ThemeManager.setProperty("radiusLarge", newValue) }
-            onResetRequested: function() { ThemeManager.resetProperty("radiusLarge") }
-        }
-
-        // Other Dimensions
-        SectionHeader { text: "Dimensions" }
-
-        PropertyEditor {
-            id: menuBarHeightProp
-            width: parent.width
-            propertyKey: "menuBarHeight"
-            propertyLabel: "Menu Bar Height"
-            propertyValue: ThemeManager.menuBarHeight
-            propertyType: "number"
-            onValueChanged: function(newValue) { ThemeManager.setProperty("menuBarHeight", newValue) }
-            onResetRequested: function() { ThemeManager.resetProperty("menuBarHeight") }
-        }
-
-        PropertyEditor {
-            id: borderWidthProp
-            width: parent.width
-            propertyKey: "borderWidth"
-            propertyLabel: "Border Width"
-            propertyValue: ThemeManager.borderWidth
-            propertyType: "number"
-            onValueChanged: function(newValue) { ThemeManager.setProperty("borderWidth", newValue) }
-            onResetRequested: function() { ThemeManager.resetProperty("borderWidth") }
-        }
+        
+        Item { width: 1; height: 40 }
     }
     
-    // Section Header Component
-    component SectionHeader: Rectangle {
-        property string text: ""
+    // ===== COLOR PROPERTY ROW =====
+    component ColorPropertyRow: Rectangle {
+        property string label
+        property color color
+        signal colorChanged(color newColor)
+        
         width: parent.width
-        height: 35
-        color: ThemeManager.surface
+        height: 40
+        color: "transparent"
         
-        Text {
-            anchors.left: parent.left
-            anchors.leftMargin: 10
-            anchors.verticalCenter: parent.verticalCenter
-            text: parent.text
-            font.pixelSize: ThemeManager.fontSizeMedium
-            font.bold: true
-            color: ThemeManager.primary
-        }
-        
-        Rectangle {
-            anchors.bottom: parent.bottom
-            width: parent.width
-            height: 1
-            color: ThemeManager.border
-        }
-    }
-
-    CustomDialog {
-        id: resetAllDialog
-        
-        dialogTitle: "Reset All Properties"
-        text: "Are you sure you want to reset all theme properties? This cannot be undone."
-        
-        acceptButtonText: "Reset All"
-        cancelButtonText: "Cancel"
-
-        strictMode: true 
-
-        onAccepted: {
-            ThemeManager.resetAllProperties()
-            root.refreshAllPropertyEditors()
-            console.log("Action validée (Clic bouton ou Touche Entrée)")
+        RowLayout {
+            anchors.fill: parent
+            anchors.leftMargin: 15
+            anchors.rightMargin: 15
+            spacing: 10
+            
+            Text {
+                Layout.preferredWidth: 150
+                text: parent.parent.label
+                color: ThemeManager.font.color.primary
+                font.pixelSize: ThemeManager.font.size.medium
+            }
+            
+            Rectangle {
+                Layout.fillWidth: true
+                Layout.preferredHeight: 30
+                color: parent.parent.color
+                border.width: ThemeManager.border.width.thin
+                border.color: ThemeManager.border.color.primary
+                radius: ThemeManager.surface.radius.small
+                
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                        colorDialog.selectedColor = parent.parent.parent.color
+                        colorDialog.open()
+                    }
+                }
+                
+                ColorDialog {
+                    id: colorDialog
+                    onAccepted: {
+                        parent.parent.parent.colorChanged(selectedColor)
+                    }
+                }
+            }
+            
+            Text {
+                Layout.preferredWidth: 80
+                text: parent.parent.color
+                color: ThemeManager.font.color.secondary
+                font.pixelSize: ThemeManager.font.size.small
+                font.family: "monospace"
+            }
         }
     }
     
+    // ===== DIALOGS =====
     FileDialog {
-        id: importFileDialog
-        title: "Import Theme"
-        nameFilters: ["JSON files (*.json)"]
-        fileMode: FileDialog.OpenFile
-        onAccepted: {
-            ThemeManager.importTheme(selectedFile.toString().replace("file://", ""))
-            root.refreshAllPropertyEditors()
-        }
-    }
-    
-    FileDialog {
-        id: exportFileDialog
+        id: exportDialog
         title: "Export Theme"
-        nameFilters: ["JSON files (*.json)"]
         fileMode: FileDialog.SaveFile
         defaultSuffix: "json"
+        nameFilters: ["JSON files (*.json)"]
+        
         onAccepted: {
-            ThemeManager.exportTheme(selectedFile.toString().replace("file://", ""))
+            ThemeManager.exportToJson(selectedFile)
+        }
+    }
+    
+    FileDialog {
+        id: importDialog
+        title: "Import Theme"
+        fileMode: FileDialog.OpenFile
+        nameFilters: ["JSON files (*.json)"]
+        
+        onAccepted: {
+            ThemeManager.importFromJson(selectedFile)
         }
     }
 }

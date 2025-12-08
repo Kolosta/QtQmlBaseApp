@@ -12,15 +12,41 @@ qt_standard_project_setup(REQUIRES 6.8)
 
 # Sources C++
 set(PROJECT_SOURCES
+    # Application
     src/main.cpp
     src/core/Application.h
     src/core/Application.cpp
+
+    # Theme management
+    # src/core/ThemeManager.h
+    # src/core/ThemeManager.cpp
+    # src/core/theme/common/ThemePalette.h
+    # src/core/theme/common/ThemePalette.cpp
+    # src/core/theme/common/ThemeSizes.h
+    # src/core/theme/common/ThemeSizes.cpp
+    # src/core/theme/components/ComponentStyles.h
+    # src/core/theme/components/ComponentStyles.cpp
+
     src/core/ThemeManager.h
     src/core/ThemeManager.cpp
+    src/core/theme/ThemeAtoms.h
+    src/core/theme/ThemeMolecules.h
+    src/core/theme/ThemeMolecules.cpp
+    src/core/theme/ThemePresets.h
+    src/core/ThemeManager.h
+    src/core/ThemeManager.cpp
+
+    # Preferences and Keymaps
     src/core/PreferencesManager.h
     src/core/PreferencesManager.cpp
+    src/core/KeymapManager.h
+    src/core/KeymapManager.cpp
+
+    # Models
     src/models/TimeModel.h
     src/models/TimeModel.cpp
+    # src/models/ThemePropertyModel.h
+    # src/models/ThemePropertyModel.cpp
 )
 
 # Fichiers QML
@@ -34,6 +60,7 @@ set(PROJECT_QML_FILES
     qml/components/common/MenuBar.qml
     qml/components/common/CustomDialog.qml
     qml/components/common/ScrollableContentArea.qml
+    qml/components/common/ShortcutDialog.qml
 
     # Input components
     qml/components/inputs/NumberField.qml
@@ -52,6 +79,7 @@ set(PROJECT_QML_FILES
     qml/components/preferences/preferencesTabs/ThemeSelector.qml
     qml/components/preferences/preferencesTabs/ThemeEditor.qml
     qml/components/preferences/preferencesTabs/PropertyEditor.qml
+    qml/components/preferences/preferencesTabs/Keymaps.qml
     qml/components/preferences/preferencesTabs/ComponentsLib.qml
     
     # Presentation components

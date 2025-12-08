@@ -4,34 +4,30 @@ import QtQmlBaseApp.Core
 
 Rectangle {
     id: root
-    height: 30
+    height: ThemeManager.sizes.spacingXxxlarge
     
-    // Détection du survol global (Input entier)
     HoverHandler {
         id: rootHover
     }
     
-    // Gestion de la couleur de fond (partie centrale)
     color: {
-        if (valueInput.visible) return ThemeManager.surface
-        if (dragArea.isDragging) return ThemeManager.background
-        // Si on survole n'importe où sur le composant, le centre devient SurfaceHover
-        if (rootHover.hovered) return ThemeManager.surfaceHover 
-        return ThemeManager.surface
+        if (valueInput.visible) return ThemeManager.colors.backgroundPrimary
+        if (dragArea.isDragging) return ThemeManager.colors.backgroundPrimary
+        if (rootHover.hovered) return ThemeManager.colors.backgroundHover
+        return ThemeManager.colors.backgroundPrimary
     }
 
-    border.width: ThemeManager.borderWidth
-    border.color: dragArea.isDragging ? ThemeManager.surfaceHover : ThemeManager.border
-    radius: ThemeManager.radiusSmall
+    border.width: ThemeManager.sizes.borderThin
+    border.color: dragArea.isDragging ? 
+        ThemeManager.colors.borderFocus : 
+        ThemeManager.colors.borderPrimary
+    radius: ThemeManager.sizes.radiusMedium
     
-    // Le clip est important ici pour que les coins des boutons latéraux 
-    // respectent l'arrondi du composant parent
-    clip: true 
+    clip: true
     
-    Behavior on color { ColorAnimation { duration: 100 } }
-    Behavior on border.color { ColorAnimation { duration: 100 } }
+    Behavior on color { ColorAnimation { duration: ThemeManager.sizes.animFast } }
+    Behavior on border.color { ColorAnimation { duration: ThemeManager.sizes.animFast } }
     
-    // Properties configurables
     property real value: 0.0
     property real minValue: -999999
     property real maxValue: 999999
@@ -40,14 +36,12 @@ Rectangle {
     property bool hasMin: false
     property bool hasMax: false
     
-    // Taille des zones de clic latérales
-    readonly property int sideButtonWidth: 30 
+    readonly property int sideButtonWidth: 90
     
     signal valueModified(real newValue)
     
     readonly property bool showSlider: hasMin && hasMax
     
-    // Partie remplie du slider (Arrière-plan)
     Rectangle {
         visible: root.showSlider
         anchors.left: parent.left
@@ -59,41 +53,38 @@ Rectangle {
             var ratio = (root.value - root.minValue) / (root.maxValue - root.minValue)
             return Math.max(0, (parent.width - 2 * parent.border.width) * ratio)
         }
-        color: ThemeManager.primary
-        radius: ThemeManager.radiusSmall - 1 // Légèrement plus petit pour l'intérieur
-        opacity: 0.3 // Légère transparence pour ne pas gêner la lisibilité
+        color: ThemeManager.colors.primaryBase
+        radius: ThemeManager.sizes.radiusSmall
+        opacity: 0.3
         
         Behavior on width {
-            NumberAnimation { duration: 50 }
+            NumberAnimation { duration: ThemeManager.sizes.animFast }
         }
     }
     
-    // --- ZONE GAUCHE (Décrémenter) ---
     Rectangle {
         id: leftButton
         width: root.sideButtonWidth
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        anchors.margins: parent.border.width // Pour ne pas écraser la bordure
+        anchors.margins: parent.border.width
         
-        // Visibilité : Uniquement si survol global ou dragging, et pas en mode édition
         visible: !valueInput.visible && (rootHover.hovered || dragArea.isDragging)
         
-        // Couleur : Surface en hover, Accent en drag
-        color: dragArea.isDragging ? ThemeManager.accent : ThemeManager.surface
+        color: dragArea.isDragging ? 
+            ThemeManager.colors.accentBase : 
+            ThemeManager.colors.backgroundPrimary
         
-        // Arrondi uniquement sur les coins gauches pour matcher le parent (visuel)
-        radius: ThemeManager.radiusSmall 
+        radius: ThemeManager.sizes.radiusSmall
         
-        Behavior on color { ColorAnimation { duration: 100 } }
+        Behavior on color { ColorAnimation { duration: ThemeManager.sizes.animFast } }
 
         Text {
             anchors.centerIn: parent
             text: "‹"
-            font.pixelSize: ThemeManager.fontSizeLarge
-            // Le texte reste visible (blanc/noir) ou s'adapte
-            color: ThemeManager.text
+            font.pixelSize: ThemeManager.sizes.fontLarge
+            color: ThemeManager.colors.textPrimary
         }
 
         MouseArea {
@@ -105,7 +96,6 @@ Rectangle {
         }
     }
     
-    // --- ZONE DROITE (Incrémenter) ---
     Rectangle {
         id: rightButton
         width: root.sideButtonWidth
@@ -116,17 +106,19 @@ Rectangle {
         
         visible: !valueInput.visible && (rootHover.hovered || dragArea.isDragging)
         
-        color: dragArea.isDragging ? ThemeManager.accent : ThemeManager.surface
+        color: dragArea.isDragging ? 
+            ThemeManager.colors.accentBase :
+            ThemeManager.colors.backgroundPrimary
         
-        radius: ThemeManager.radiusSmall
+        radius: ThemeManager.sizes.radiusSmall
         
-        Behavior on color { ColorAnimation { duration: 100 } }
+        Behavior on color { ColorAnimation { duration: ThemeManager.sizes.animFast } }
 
         Text {
             anchors.centerIn: parent
             text: "›"
-            font.pixelSize: ThemeManager.fontSizeLarge
-            color: ThemeManager.text
+            font.pixelSize: ThemeManager.sizes.fontLarge
+            color: ThemeManager.colors.textPrimary
         }
 
         MouseArea {
@@ -138,32 +130,30 @@ Rectangle {
         }
     }
     
-    // Valeur au centre
     Text {
         id: valueText
         anchors.centerIn: parent
         text: formatValue(root.value)
-        color: ThemeManager.text
-        font.pixelSize: ThemeManager.fontSizeMedium
+        color: ThemeManager.colors.textPrimary
+        font.pixelSize: ThemeManager.sizes.fontMedium
         visible: !valueInput.visible
     }
     
-    // Champ de texte pour édition manuelle
     TextField {
         id: valueInput
         anchors.fill: parent
         anchors.margins: parent.border.width
         visible: false
         horizontalAlignment: Text.AlignCenter
-        font.pixelSize: ThemeManager.fontSizeMedium
-        color: ThemeManager.text
+        font.pixelSize: ThemeManager.sizes.fontMedium
+        color: ThemeManager.colors.textPrimary
         selectByMouse: true
         
         background: Rectangle {
-            color: ThemeManager.surfaceHover
-            border.width: ThemeManager.borderWidth
-            border.color: ThemeManager.accent
-            radius: ThemeManager.radiusSmall
+            color: ThemeManager.colors.backgroundHover
+            border.width: ThemeManager.sizes.borderThin
+            border.color: ThemeManager.colors.borderFocus
+            radius: ThemeManager.sizes.radiusMedium
         }
         
         validator: DoubleValidator {
@@ -188,12 +178,10 @@ Rectangle {
         }
     }
     
-    // Zone de drag centrale
     MouseArea {
         id: dragArea
         anchors.fill: parent
-        // Les marges correspondent maintenant à la largeur des zones latérales
-        anchors.leftMargin: root.sideButtonWidth 
+        anchors.leftMargin: root.sideButtonWidth
         anchors.rightMargin: root.sideButtonWidth
         
         acceptedButtons: Qt.LeftButton | Qt.RightButton
@@ -290,7 +278,6 @@ Rectangle {
         }
     }
     
-    // MouseArea invisible pour détecter les clics en dehors du TextField
     MouseArea {
         id: externalClickDetector
         anchors.fill: parent
@@ -299,7 +286,6 @@ Rectangle {
         z: -1
     }
     
-    // Overlay global pour capturer les clics en dehors du composant
     Loader {
         active: valueInput.visible
         sourceComponent: MouseArea {
@@ -324,18 +310,6 @@ Rectangle {
         }
     }
     
-    //TODO : à remettre ??
-    // Connections {
-    //     target: root.Window.window
-    //     enabled: dragArea.isDragging
-    //     function onMousePressed(mouse) {
-    //         if (mouse.button === Qt.RightButton && dragArea.isDragging) {
-    //             cancelDrag()
-    //         }
-    //     }
-    // }
-    
-    // Fonctions utilitaires
     function formatValue(val) {
         if (root.decimals === 0) {
             return Math.round(val).toString()

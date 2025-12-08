@@ -1,12 +1,26 @@
 {
   "name": "Blue",
-  "background": "#0d1b2a",
-  "surface": "#1b2838",
-  "surfaceHover": "#253647",
-  "primary": "#1e90ff",
-  "primaryHover": "#4da3ff",
-  "text": "#e0f4ff",
-  "textSecondary": "#7ab8e8",
-  "border": "#2c4a66",
-  "accent": "#00bfff"
+  "colors": {
+    "background": {
+      "primary": "#0d1b2a"
+    },
+    "surface": {
+      "primary": "#1b2838",
+      "hover": "#253647"
+    },
+    "primary": {
+      "base": "#1e90ff",
+      "hover": "#4da3ff"
+    },
+    "text": {
+      "primary": "#e0f4ff",
+      "secondary": "#7ab8e8"
+    },
+    "border": {
+      "primary": "#2c4a66"
+    },
+    "accent": {
+      "base": "#00bfff"
+    }
+  }
 }

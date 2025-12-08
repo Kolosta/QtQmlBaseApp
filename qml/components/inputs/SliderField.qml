@@ -6,10 +6,10 @@ import QtQmlBaseApp.Core
 Rectangle {
     id: root
     height: 30
-    color: ThemeManager.surface
-    border.width: ThemeManager.borderWidth
-    border.color: ThemeManager.border
-    radius: ThemeManager.radiusSmall
+    color: ThemeManager.colors.surfacePrimary
+    border.width: ThemeManager.sizes.borderThin
+    border.color: ThemeManager.colors.borderPrimary
+    radius: ThemeManager.sizes.radiusSmall
     
     property string label: "Property"
     property real value: 0.0
@@ -26,8 +26,8 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.margins: parent.border.width
         width: Math.max(0, (parent.width - 2 * parent.border.width) * ((root.value - root.minValue) / (root.maxValue - root.minValue)))
-        color: ThemeManager.primary
-        radius: ThemeManager.radiusSmall
+        color: ThemeManager.colors.primaryBase
+        radius: ThemeManager.sizes.radiusSmall
         
         Behavior on width {
             NumberAnimation { duration: 50 }
@@ -41,8 +41,8 @@ Rectangle {
         anchors.leftMargin: 10
         anchors.verticalCenter: parent.verticalCenter
         text: root.label
-        color: ThemeManager.text
-        font.pixelSize: ThemeManager.fontSizeSmall
+        color: ThemeManager.sizes.textPrimary
+        font.pixelSize: ThemeManager.sizes.fontSmall
         visible: !valueInput.visible
     }
     
@@ -53,8 +53,8 @@ Rectangle {
         anchors.rightMargin: 10
         anchors.verticalCenter: parent.verticalCenter
         text: root.value.toFixed(root.decimals)
-        color: ThemeManager.text
-        font.pixelSize: ThemeManager.fontSizeSmall
+        color: ThemeManager.colors.textPrimary
+        font.pixelSize: ThemeManager.sizes.fontSmall
         visible: !valueInput.visible
     }
     
@@ -65,15 +65,15 @@ Rectangle {
         anchors.margins: parent.border.width
         visible: false
         horizontalAlignment: Text.AlignCenter
-        font.pixelSize: ThemeManager.fontSizeSmall
-        color: ThemeManager.text
+        font.pixelSize: ThemeManager.sizes.fontSmall
+        color: ThemeManager.colors.textPrimary
         selectByMouse: true
         
         background: Rectangle {
-            color: ThemeManager.surfaceHover
-            border.width: ThemeManager.borderWidth
-            border.color: ThemeManager.accent
-            radius: ThemeManager.radiusSmall
+            color: ThemeManager.colors.surfaceHover
+            border.width: ThemeManager.sizes.borderThin
+            border.color: ThemeManager.colors.accentBase
+            radius: ThemeManager.sizes.radiusSmall
         }
         
         validator: DoubleValidator {

@@ -20,10 +20,10 @@ Item {
     Rectangle {
         width: parent.width
         height: mainLayout.implicitHeight
-        color: ThemeManager.surface
-        border.width: ThemeManager.borderWidth
-        border.color: ThemeManager.border
-        radius: ThemeManager.radius
+        color: ThemeManager.surfacePrimary
+        border.width: ThemeManager.borderThin
+        border.color: ThemeManager.borderPrimary
+        radius: ThemeManager.radiusMedium
         
         ColumnLayout {
             id: mainLayout
@@ -56,7 +56,7 @@ Item {
                                 icon.source: root.collapsed ? "qrc:/resources/icons/chevron-right.svg" : "qrc:/resources/icons/chevron-down.svg"
                                 icon.width: 10
                                 icon.height: 10
-                                icon.color: ThemeManager.text
+                                icon.color: ThemeManager.textPrimary
                                 enabled: false
                             }
                         }
@@ -67,7 +67,7 @@ Item {
                         Layout.fillWidth: true
                         text: root.title
                         font.pixelSize: ThemeManager.fontSizeLarge
-                        color: ThemeManager.text
+                        color: ThemeManager.textPrimary
                     }
                 }
             }

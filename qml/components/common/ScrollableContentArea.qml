@@ -42,17 +42,16 @@ Rectangle {
             contentItem: Rectangle {
                 implicitWidth: scrollBar.width
                 radius: scrollBar.width / 2
-                color: ThemeManager.surface
-                opacity: scrollBar.pressed ? 0.9 : 
-                         (scrollBar.hovered || scrollbarZoneHover.containsMouse) ? 0.7 : 0.5
+                color: ThemeManager.colors.surfacePrimary
+                opacity: scrollBar.pressed ? 0.9 : (scrollBar.hovered || scrollbarZoneHover.containsMouse) ? 0.7 : 0.5
                 
                 Behavior on opacity {
-                    NumberAnimation { duration: ThemeManager.animationDuration }
+                    NumberAnimation { duration: ThemeManager.sizes.animNormal }
                 }
             }
             
             Behavior on width {
-                NumberAnimation { duration: ThemeManager.animationDuration }
+                NumberAnimation { duration: ThemeManager.sizes.animNormal }
             }
         }
     }

@@ -1,29 +1,190 @@
 {
   "name": "Default",
-  "version": "1.0",
-  "background": "#DDE47D",
-  "surface": "#2d2d2d",
-  "surfaceHover": "#3d3d3d",
-  "primary": "#0d7377",
-  "primaryHover": "#14a0a5",
-  "text": "#ffffff",
-  "textSecondary": "#b0b0b0",
-  "border": "#3d3d3d",
-  "accent": "#4a9eff",
-  "error": "#f44336",
-  "success": "#4caf50",
-  "warning": "#ff9800",
-  "spacingSmall": 5,
-  "spacing": 10,
-  "spacingLarge": 20,
-  "radiusSmall": 4,
-  "radius": 6,
-  "radiusLarge": 12,
-  "menuBarHeight": 30,
-  "borderWidth": 1,
-  "animationDuration": 50,
-  "fontSizeSmall": 11,
-  "fontSizeMedium": 13,
-  "fontSizeLarge": 16,
-  "fontSizeTitle": 18
+  "version": "2.0",
+  
+  "resolution": {
+    "scale": 1.0
+  },
+  
+  "colors": {
+    "background": {
+      "primary": "#1e1e1e",
+      "secondary": "#252525",
+      "tertiary": "#2a2a2a"
+    },
+    "surface": {
+      "primary": "#2d2d2d",
+      "secondary": "#353535",
+      "hover": "#3d3d3d",
+      "active": "#4d4d4d",
+      "disabled": "#252525"
+    },
+    "primary": {
+      "base": "#0d7377",
+      "hover": "#14a0a5",
+      "active": "#0a5b5e",
+      "disabled": "#084648"
+    },
+    "text": {
+      "primary": "#ffffff",
+      "secondary": "#b0b0b0",
+      "tertiary": "#808080",
+      "disabled": "#666666",
+      "onPrimary": "#ffffff"
+    },
+    "border": {
+      "primary": "#3d3d3d",
+      "secondary": "#454545",
+      "focus": "#4a9eff",
+      "disabled": "#2d2d2d"
+    },
+    "accent": {
+      "base": "#4a9eff",
+      "hover": "#6bb0ff",
+      "active": "#2a7edf"
+    },
+    "status": {
+      "error": "#f44336",
+      "errorHover": "#f55a4e",
+      "success": "#4caf50",
+      "successHover": "#66bb6a",
+      "warning": "#ff9800",
+      "warningHover": "#ffa726",
+      "info": "#2196f3",
+      "infoHover": "#42a5f5"
+    }
+  },
+  
+  "spacing": {
+    "none": 0,
+    "xxsmall": 2,
+    "xsmall": 4,
+    "small": 5,
+    "medium": 10,
+    "large": 15,
+    "xlarge": 20,
+    "xxlarge": 30,
+    "xxxlarge": 40
+  },
+  
+  "radius": {
+    "none": 0,
+    "small": 4,
+    "medium": 6,
+    "large": 12,
+    "xlarge": 16,
+    "round": 999
+  },
+  
+  "borders": {
+    "none": 0,
+    "thin": 1,
+    "medium": 2,
+    "thick": 3
+  },
+  
+  "fonts": {
+    "size": {
+      "xsmall": 10,
+      "small": 11,
+      "medium": 13,
+      "large": 16,
+      "xlarge": 18,
+      "xxlarge": 24,
+      "xxxlarge": 32
+    },
+    "weight": {
+      "light": 300,
+      "normal": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700
+    }
+  },
+  
+  "animation": {
+    "duration": {
+      "instant": 0,
+      "fast": 50,
+      "normal": 150,
+      "slow": 300
+    }
+  },
+  
+  "components": {
+    "menuBar": {
+      "height": 30,
+      "background": null,
+      "text": null,
+      "hoverBackground": null
+    },
+    "numberField": {
+      "background": null,
+      "border": null,
+      "borderWidth": null,
+      "radius": null,
+      "text": null,
+      "hoverBackground": null,
+      "focusBorder": null,
+      "sideButtonWidth": 30
+    },
+    "sliderField": {
+      "background": null,
+      "border": null,
+      "borderWidth": null,
+      "radius": null,
+      "fillColor": null,
+      "text": null
+    },
+    "button": {
+      "background": null,
+      "hoverBackground": null,
+      "activeBackground": null,
+      "disabledBackground": null,
+      "text": null,
+      "border": null,
+      "borderWidth": null,
+      "radius": null,
+      "padding": null
+    },
+    "input": {
+      "background": null,
+      "border": null,
+      "borderWidth": null,
+      "focusBorder": null,
+      "radius": null,
+      "text": null,
+      "placeholder": null
+    },
+    "dialog": {
+      "background": null,
+      "border": null,
+      "borderWidth": null,
+      "radius": null,
+      "overlay": "#80000000"
+    },
+    "preferencesWindow": {
+      "background": null,
+      "sidebarBackground": "#252525",
+      "sidebarWidth": 180
+    },
+    "colorPicker": {
+      "background": null,
+      "border": null,
+      "wheelSize": 180,
+      "valueBarWidth": 30
+    },
+    "section": {
+      "background": null,
+      "border": null,
+      "borderWidth": null,
+      "radius": null,
+      "headerHeight": 45
+    },
+    "subsection": {
+      "background": null,
+      "headerHeight": 35,
+      "indent": 15
+    }
+  }
 }

@@ -1,12 +1,84 @@
 {
   "name": "Dark",
-  "background": "#1e1e1e",
-  "surface": "#2d2d2d",
-  "surfaceHover": "#3d3d3d",
-  "primary": "#0d7377",
-  "primaryHover": "#14a0a5",
-  "text": "#ffffff",
-  "textSecondary": "#b0b0b0",
-  "border": "#3d3d3d",
-  "accent": "#4a9eff"
+  "version": "2.0",
+  
+  "colors": {
+    "background_primary": "#1e1e1e",
+    "background_secondary": "#252525",
+    "background_tertiary": "#2a2a2a",
+    
+    "surface_primary": "#2d2d2d",
+    "surface_secondary": "#353535",
+    "surface_hover": "#3d3d3d",
+    "surface_active": "#4d4d4d",
+    "surface_disabled": "#252525",
+    
+    "primary_base": "#0d7377",
+    "primary_hover": "#14a0a5",
+    "primary_active": "#0a5b5e",
+    "primary_disabled": "#084648",
+    
+    "text_primary": "#ffffff",
+    "text_secondary": "#b0b0b0",
+    "text_tertiary": "#808080",
+    "text_disabled": "#666666",
+    "text_on_primary": "#ffffff",
+    
+    "border_primary": "#3d3d3d",
+    "border_secondary": "#454545",
+    "border_focus": "#4a9eff",
+    "border_disabled": "#2d2d2d",
+    
+    "accent_base": "#4a9eff",
+    "accent_hover": "#6bb0ff",
+    "accent_active": "#2a7edf",
+    
+    "status_error": "#f44336",
+    "status_error_hover": "#f55a4e",
+    "status_success": "#4caf50",
+    "status_success_hover": "#66bb6a",
+    "status_warning": "#ff9800",
+    "status_warning_hover": "#ffa726",
+    "status_info": "#2196f3",
+    "status_info_hover": "#42a5f5"
+  },
+  
+  "sizes": {
+    "none": 0,
+    "xxsmall": 2,
+    "xsmall": 4,
+    "small": 5,
+    "medium": 10,
+    "large": 15,
+    "xlarge": 20,
+    "xxlarge": 30,
+    "xxxlarge": 40,
+    
+    "radius_small": 4,
+    "radius_medium": 6,
+    "radius_large": 12,
+    "radius_xlarge": 16,
+    
+    "border_thin": 1,
+    "border_medium": 2,
+    "border_thick": 3,
+    
+    "font_xsmall": 10,
+    "font_small": 11,
+    "font_medium": 13,
+    "font_large": 16,
+    "font_xlarge": 18,
+    "font_xxlarge": 24,
+    "font_xxxlarge": 32
+  },
+  
+  "components": {
+    "pref_window": {
+      "sidebar_width": 180
+    },
+    "menu_bar": {
+      "height": 30
+    },
+    "button": {}
+  }
 }

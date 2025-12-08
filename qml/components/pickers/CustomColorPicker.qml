@@ -196,10 +196,10 @@ Popup {
     }
     
     background: Rectangle {
-        color: ThemeManager.surface
-        border.width: ThemeManager.borderWidth
-        border.color: ThemeManager.border
-        radius: ThemeManager.radius
+        color: ThemeManager.colors.surfacePrimary
+        border.width: ThemeManager.sizes.borderThin
+        border.color: ThemeManager.colors.borderPrimary
+        radius: ThemeManager.sizes.radiusMedium
     }
     
     contentItem: ColumnLayout {
@@ -234,8 +234,8 @@ Popup {
             //     Layout.preferredWidth: 30
             //     Layout.preferredHeight: 180
             //     radius: ThemeManager.radiusSmall
-            //     border.width: ThemeManager.borderWidth
-            //     border.color: ThemeManager.border
+            //     border.width: ThemeManager.borderThin
+            //     border.color: ThemeManager.borderPrimary
                 
             //     gradient: Gradient {
             //         GradientStop { position: 0.0; color: Qt.hsva(root.hue, root.saturation, 1.0, 1) }
@@ -479,24 +479,24 @@ Popup {
             
             Text {
                 text: "Hex"
-                color: ThemeManager.text
-                font.pixelSize: ThemeManager.fontSizeSmall
+                color: ThemeManager.colors.textPrimary
+                font.pixelSize: ThemeManager.sizes.fontSmall
             }
             
             TextField {
                 id: hexField
                 Layout.fillWidth: true
                 text: root.currentColor.toString().toUpperCase()
-                font.pixelSize: ThemeManager.fontSizeSmall
+                font.pixelSize: ThemeManager.sizes.fontSmall
                 horizontalAlignment: Text.AlignLeft
-                color: ThemeManager.text
+                color: ThemeManager.colors.textPrimary
                 selectByMouse: true
                 
                 background: Rectangle {
-                    color: ThemeManager.surface
-                    border.width: ThemeManager.borderWidth
-                    border.color: ThemeManager.border
-                    radius: ThemeManager.radiusSmall
+                    color: ThemeManager.colors.surfacePrimary
+                    border.width: ThemeManager.sizes.borderThin
+                    border.color: ThemeManager.colors.borderPrimary
+                    radius: ThemeManager.sizes.radiusSmall
                 }
                 
                 onEditingFinished: {
@@ -517,10 +517,10 @@ Popup {
                 height: 30
                 
                 background: Rectangle {
-                    color: parent.pressed ? ThemeManager.surfaceHover : ThemeManager.surface
-                    border.width: ThemeManager.borderWidth
-                    border.color: ThemeManager.border
-                    radius: ThemeManager.radiusSmall
+                    color: parent.pressed ? ThemeManager.colors.surfaceHover : ThemeManager.colors.surfacePrimary
+                    border.width: ThemeManager.sizes.borderThin
+                    border.color: ThemeManager.colors.borderPrimary
+                    radius: ThemeManager.sizes.radiusSmall
                 }
                 
                 contentItem: Text {

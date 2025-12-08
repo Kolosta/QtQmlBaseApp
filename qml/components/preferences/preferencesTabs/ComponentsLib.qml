@@ -33,9 +33,9 @@ Item {
         
         Text {
             text: "Components Lib"
-            font.pixelSize: ThemeManager.fontSizeTitle
+            font.pixelSize: ThemeManager.sizes.fontExtraLarge
             font.bold: true
-            color: ThemeManager.text
+            color: ThemeManager.colors.textPrimary
         }
         
         // ====== NUMBERFIELD SECTION ======
@@ -60,8 +60,8 @@ Item {
                         
                         Text {
                             text: "Integer avec min/max (0-100) - Affiche le slider"
-                            color: ThemeManager.text
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.colors.textPrimary
+                            font.pixelSize: ThemeManager.sizes.fontSmall
                             font.bold: true
                         }
                         
@@ -83,15 +83,15 @@ Item {
                         
                         Text {
                             text: "Valeur: " + root.intValue
-                            color: ThemeManager.textSecondary
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.colors.textSecondary
+                            font.pixelSize: ThemeManager.sizes.fontSmall
                         }
                     }
                     
                     Rectangle {
                         Layout.fillWidth: true
                         height: 1
-                        color: ThemeManager.border
+                        color: ThemeManager.colors.borderPrimary
                         opacity: 0.3
                     }
                     
@@ -102,8 +102,8 @@ Item {
                         
                         Text {
                             text: "Float avec 5 décimales (min: 0, max: 10)"
-                            color: ThemeManager.text
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.colors.textPrimary
+                            font.pixelSize: ThemeManager.sizes.fontSmall
                             font.bold: true
                         }
                         
@@ -125,15 +125,15 @@ Item {
                         
                         Text {
                             text: "Valeur: " + root.floatValue.toFixed(5)
-                            color: ThemeManager.textSecondary
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.colors.textSecondary
+                            font.pixelSize: ThemeManager.sizes.fontSmall
                         }
                     }
                     
                     Rectangle {
                         Layout.fillWidth: true
                         height: 1
-                        color: ThemeManager.border
+                        color: ThemeManager.colors.borderPrimary
                         opacity: 0.3
                     }
                     
@@ -144,8 +144,8 @@ Item {
                         
                         Text {
                             text: "Sans limites (scroll infini) - Pas de slider"
-                            color: ThemeManager.text
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.colors.textPrimary
+                            font.pixelSize: ThemeManager.sizes.fontSmall
                             font.bold: true
                         }
                         
@@ -165,15 +165,15 @@ Item {
                         
                         Text {
                             text: "Valeur: " + root.unboundedValue
-                            color: ThemeManager.textSecondary
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.colors.textSecondary
+                            font.pixelSize: ThemeManager.sizes.fontSmall
                         }
                     }
                     
                     Rectangle {
                         Layout.fillWidth: true
                         height: 1
-                        color: ThemeManager.border
+                        color: ThemeManager.colors.borderPrimary
                         opacity: 0.3
                     }
                     
@@ -184,8 +184,8 @@ Item {
                         
                         Text {
                             text: "Avec minimum uniquement (min: 0) - Pas de slider"
-                            color: ThemeManager.text
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.colors.textPrimary
+                            font.pixelSize: ThemeManager.sizes.fontSmall
                             font.bold: true
                         }
                         
@@ -206,15 +206,15 @@ Item {
                         
                         Text {
                             text: "Valeur: " + Math.max(0, root.unboundedValue)
-                            color: ThemeManager.textSecondary
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.colors.textSecondary
+                            font.pixelSize: ThemeManager.sizes.fontSmall
                         }
                     }
                     
                     Rectangle {
                         Layout.fillWidth: true
                         height: 1
-                        color: ThemeManager.border
+                        color: ThemeManager.colors.borderPrimary
                         opacity: 0.3
                     }
                     
@@ -225,8 +225,8 @@ Item {
                         
                         Text {
                             text: "Float précis (0-1, step: 0.001, 3 décimales)"
-                            color: ThemeManager.text
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.colors.textPrimary
+                            font.pixelSize: ThemeManager.sizes.fontSmall
                             font.bold: true
                         }
                         
@@ -248,15 +248,15 @@ Item {
                         
                         Text {
                             text: "Valeur: " + root.preciseValue.toFixed(3) + " (Shift pour précision fine)"
-                            color: ThemeManager.textSecondary
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.colors.textSecondary
+                            font.pixelSize: ThemeManager.sizes.fontSmall
                         }
                     }
                     
                     Rectangle {
                         Layout.fillWidth: true
                         height: 1
-                        color: ThemeManager.border
+                        color: ThemeManager.colors.borderPrimary
                         opacity: 0.3
                     }
                     
@@ -267,8 +267,8 @@ Item {
                         
                         Text {
                             text: "Grand step (0-1000, step: 50)"
-                            color: ThemeManager.text
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.colors.textPrimary
+                            font.pixelSize: ThemeManager.sizes.fontSmall
                             font.bold: true
                         }
                         
@@ -290,15 +290,15 @@ Item {
                         
                         Text {
                             text: "Valeur: " + root.largeStepValue
-                            color: ThemeManager.textSecondary
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.colors.textSecondary
+                            font.pixelSize: ThemeManager.sizes.fontSmall
                         }
                     }
                     
                     Rectangle {
                         Layout.fillWidth: true
                         height: 1
-                        color: ThemeManager.border
+                        color: ThemeManager.colors.borderPrimary
                         opacity: 0.3
                     }
                     
@@ -309,8 +309,8 @@ Item {
                         
                         Text {
                             text: "💡 Interactions disponibles:"
-                            color: ThemeManager.text
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.sizes.textPrimary
+                            font.pixelSize: ThemeManager.sizes.fontSizeSmall
                             font.bold: true
                         }
                         
@@ -321,8 +321,8 @@ Item {
                                   "• Hover : affiche les boutons ‹ › pour incrémenter/décrémenter\n" +
                                   "• Clic droit pendant drag : annuler\n" +
                                   "• Escape : annuler drag ou édition"
-                            color: ThemeManager.textSecondary
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.colors.textSecondary
+                            font.pixelSize: ThemeManager.sizes.fontSizeSmall
                             lineHeight: 1.4
                         }
                     }
@@ -352,8 +352,8 @@ Item {
                         
                         Text {
                             text: "Opacity (0-1, 3 décimales)"
-                            color: ThemeManager.text
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.sizes.textPrimary
+                            font.pixelSize: ThemeManager.sizes.fontSizeSmall
                             font.bold: true
                         }
                         
@@ -373,15 +373,15 @@ Item {
                         
                         Text {
                             text: "Valeur: " + root.opacityValue.toFixed(3)
-                            color: ThemeManager.textSecondary
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.colors.textSecondary
+                            font.pixelSize: ThemeManager.sizes.fontSizeSmall
                         }
                     }
                     
                     Rectangle {
                         Layout.fillWidth: true
                         height: 1
-                        color: ThemeManager.border
+                        color: ThemeManager.colors.borderPrimary
                         opacity: 0.3
                     }
                     
@@ -392,8 +392,8 @@ Item {
                         
                         Text {
                             text: "Volume (0-1, 2 décimales)"
-                            color: ThemeManager.text
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.sizes.textPrimary
+                            font.pixelSize: ThemeManager.sizes.fontSizeSmall
                             font.bold: true
                         }
                         
@@ -413,15 +413,15 @@ Item {
                         
                         Text {
                             text: "Valeur: " + root.volumeValue.toFixed(2)
-                            color: ThemeManager.textSecondary
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.colors.textSecondary
+                            font.pixelSize: ThemeManager.sizes.fontSizeSmall
                         }
                     }
                     
                     Rectangle {
                         Layout.fillWidth: true
                         height: 1
-                        color: ThemeManager.border
+                        color: ThemeManager.colors.borderPrimary
                         opacity: 0.3
                     }
                     
@@ -432,8 +432,8 @@ Item {
                         
                         Text {
                             text: "Température (-20°C à 50°C, 1 décimale)"
-                            color: ThemeManager.text
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.sizes.textPrimary
+                            font.pixelSize: ThemeManager.sizes.fontSizeSmall
                             font.bold: true
                         }
                         
@@ -453,15 +453,15 @@ Item {
                         
                         Text {
                             text: "Valeur: " + root.temperatureValue.toFixed(1) + "°C"
-                            color: ThemeManager.textSecondary
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.colors.textSecondary
+                            font.pixelSize: ThemeManager.sizes.fontSizeSmall
                         }
                     }
                     
                     Rectangle {
                         Layout.fillWidth: true
                         height: 1
-                        color: ThemeManager.border
+                        color: ThemeManager.colors.borderPrimary
                         opacity: 0.3
                     }
                     
@@ -472,8 +472,8 @@ Item {
                         
                         Text {
                             text: "Pourcentage (0-100, entier)"
-                            color: ThemeManager.text
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.sizes.textPrimary
+                            font.pixelSize: ThemeManager.sizes.fontSizeSmall
                             font.bold: true
                         }
                         
@@ -493,15 +493,15 @@ Item {
                         
                         Text {
                             text: "Valeur: " + root.percentValue + "%"
-                            color: ThemeManager.textSecondary
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.colors.textSecondary
+                            font.pixelSize: ThemeManager.sizes.fontSizeSmall
                         }
                     }
                     
                     Rectangle {
                         Layout.fillWidth: true
                         height: 1
-                        color: ThemeManager.border
+                        color: ThemeManager.colors.borderPrimary
                         opacity: 0.3
                     }
                     
@@ -512,8 +512,8 @@ Item {
                         
                         Text {
                             text: "💡 Interactions disponibles:"
-                            color: ThemeManager.text
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.sizes.textPrimary
+                            font.pixelSize: ThemeManager.sizes.fontSizeSmall
                             font.bold: true
                         }
                         
@@ -521,8 +521,8 @@ Item {
                             text: "• Clic sur le slider : positionner la valeur\n" +
                                   "• Drag : modifier en continu\n" +
                                   "• Double-clic : édition manuelle du nombre"
-                            color: ThemeManager.textSecondary
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.colors.textSecondary
+                            font.pixelSize: ThemeManager.sizes.fontSizeSmall
                             lineHeight: 1.4
                         }
                     }
@@ -552,8 +552,8 @@ Item {
                         
                         Text {
                             text: "Text Alignment (3 options)"
-                            color: ThemeManager.text
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.sizes.textPrimary
+                            font.pixelSize: ThemeManager.sizes.fontSizeSmall
                             font.bold: true
                         }
                         
@@ -568,15 +568,15 @@ Item {
                         
                         Text {
                             text: "Sélection: " + ["Left", "Center", "Right"][root.alignmentIndex]
-                            color: ThemeManager.textSecondary
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.colors.textSecondary
+                            font.pixelSize: ThemeManager.sizes.fontSizeSmall
                         }
                     }
                     
                     Rectangle {
                         Layout.fillWidth: true
                         height: 1
-                        color: ThemeManager.border
+                        color: ThemeManager.colors.borderPrimary
                         opacity: 0.3
                     }
                     
@@ -587,8 +587,8 @@ Item {
                         
                         Text {
                             text: "View Mode (2 options)"
-                            color: ThemeManager.text
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.sizes.textPrimary
+                            font.pixelSize: ThemeManager.sizes.fontSizeSmall
                             font.bold: true
                         }
                         
@@ -603,15 +603,15 @@ Item {
                         
                         Text {
                             text: "Mode: " + ["List", "Grid"][root.viewModeIndex]
-                            color: ThemeManager.textSecondary
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.colors.textSecondary
+                            font.pixelSize: ThemeManager.sizes.fontSizeSmall
                         }
                     }
                     
                     Rectangle {
                         Layout.fillWidth: true
                         height: 1
-                        color: ThemeManager.border
+                        color: ThemeManager.colors.borderPrimary
                         opacity: 0.3
                     }
                     
@@ -622,8 +622,8 @@ Item {
                         
                         Text {
                             text: "Quality Settings (4 options)"
-                            color: ThemeManager.text
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.sizes.textPrimary
+                            font.pixelSize: ThemeManager.sizes.fontSizeSmall
                             font.bold: true
                         }
                         
@@ -638,15 +638,15 @@ Item {
                         
                         Text {
                             text: "Qualité: " + ["Low", "Medium", "High", "Ultra"][root.qualityIndex]
-                            color: ThemeManager.textSecondary
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.colors.textSecondary
+                            font.pixelSize: ThemeManager.sizes.fontSizeSmall
                         }
                     }
                     
                     Rectangle {
                         Layout.fillWidth: true
                         height: 1
-                        color: ThemeManager.border
+                        color: ThemeManager.colors.borderPrimary
                         opacity: 0.3
                     }
                     
@@ -657,8 +657,8 @@ Item {
                         
                         Text {
                             text: "💡 Usage:"
-                            color: ThemeManager.text
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.sizes.textPrimary
+                            font.pixelSize: ThemeManager.sizes.fontSizeSmall
                             font.bold: true
                         }
                         
@@ -666,8 +666,8 @@ Item {
                             text: "• Clic sur une option : sélectionner\n" +
                                   "• L'option sélectionnée est mise en surbrillance\n" +
                                   "• Idéal pour des choix mutuellement exclusifs (radio group)"
-                            color: ThemeManager.textSecondary
-                            font.pixelSize: ThemeManager.fontSizeSmall
+                            color: ThemeManager.colors.textSecondary
+                            font.pixelSize: ThemeManager.sizes.fontSizeSmall
                             lineHeight: 1.4
                         }
                     }

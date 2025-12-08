@@ -1,128 +1,182 @@
+// #ifndef THEMEMANAGER_NEW_H
+// #define THEMEMANAGER_NEW_H
 #ifndef THEMEMANAGER_H
 #define THEMEMANAGER_H
 
 #include <QObject>
-#include <QVariantMap>
+#include <QString>
 #include <QStringList>
 #include <QColor>
+#include "core/theme/ThemeAtoms.h"
+#include "core/theme/ThemeMolecules.h"
 
-class ThemeManager : public QObject
-{
+class ThemeManager : public QObject {
     Q_OBJECT
+    
+    // ===== ACCÈS HIÉRARCHIQUE =====
+    // Theme.color.primary (accès direct aux couleurs de base)
+    Q_PROPERTY(ColorAtom* color READ color CONSTANT)
+    
+    // Theme.surface.color.primary, Theme.surface.spacing.medium, Theme.surface.radius.small
+    Q_PROPERTY(SurfaceMolecule* surface READ surface CONSTANT)
+    
+    // Theme.font.color.primary, Theme.font.size.medium, Theme.font.weight.bold
+    Q_PROPERTY(FontMolecule* font READ font CONSTANT)
+    
+    // Theme.border.color.primary, Theme.border.width.thin
+    Q_PROPERTY(BorderMolecule* border READ border CONSTANT)
+    
+    // ===== PROPRIÉTÉS GLOBALES =====
     Q_PROPERTY(QString currentTheme READ currentTheme WRITE setCurrentTheme NOTIFY currentThemeChanged)
-    Q_PROPERTY(QStringList availableThemes READ availableThemes NOTIFY availableThemesChanged)
-    
-    // Colors
-    Q_PROPERTY(QColor background READ background NOTIFY themePropertiesChanged)
-    Q_PROPERTY(QColor surface READ surface NOTIFY themePropertiesChanged)
-    Q_PROPERTY(QColor surfaceHover READ surfaceHover NOTIFY themePropertiesChanged)
-    Q_PROPERTY(QColor primary READ primary NOTIFY themePropertiesChanged)
-    Q_PROPERTY(QColor primaryHover READ primaryHover NOTIFY themePropertiesChanged)
-    Q_PROPERTY(QColor text READ text NOTIFY themePropertiesChanged)
-    Q_PROPERTY(QColor textSecondary READ textSecondary NOTIFY themePropertiesChanged)
-    Q_PROPERTY(QColor border READ border NOTIFY themePropertiesChanged)
-    Q_PROPERTY(QColor accent READ accent NOTIFY themePropertiesChanged)
-    Q_PROPERTY(QColor error READ error NOTIFY themePropertiesChanged)
-    Q_PROPERTY(QColor success READ success NOTIFY themePropertiesChanged)
-    Q_PROPERTY(QColor warning READ warning NOTIFY themePropertiesChanged)
-    
-    // Dimensions
-    Q_PROPERTY(int menuBarHeight READ menuBarHeight NOTIFY themePropertiesChanged)
-    Q_PROPERTY(int spacing READ spacing NOTIFY themePropertiesChanged)
-    Q_PROPERTY(int spacingSmall READ spacingSmall NOTIFY themePropertiesChanged)
-    Q_PROPERTY(int spacingLarge READ spacingLarge NOTIFY themePropertiesChanged)
-    Q_PROPERTY(int radius READ radius NOTIFY themePropertiesChanged)
-    Q_PROPERTY(int radiusSmall READ radiusSmall NOTIFY themePropertiesChanged)
-    Q_PROPERTY(int radiusLarge READ radiusLarge NOTIFY themePropertiesChanged)
-    Q_PROPERTY(int borderWidth READ borderWidth NOTIFY themePropertiesChanged)
-    Q_PROPERTY(int animationDuration READ animationDuration NOTIFY themePropertiesChanged)
-    
-    // Fonts
-    Q_PROPERTY(int fontSizeSmall READ fontSizeSmall NOTIFY themePropertiesChanged)
-    Q_PROPERTY(int fontSizeMedium READ fontSizeMedium NOTIFY themePropertiesChanged)
-    Q_PROPERTY(int fontSizeLarge READ fontSizeLarge NOTIFY themePropertiesChanged)
-    Q_PROPERTY(int fontSizeTitle READ fontSizeTitle NOTIFY themePropertiesChanged)
+    Q_PROPERTY(QStringList availableThemes READ availableThemes CONSTANT)
+    Q_PROPERTY(qreal scale READ scale WRITE setScale NOTIFY scaleChanged)
 
 public:
-    explicit ThemeManager(QObject *parent = nullptr);
+    static ThemeManager& instance();
     
+    // Accès aux molécules
+    ColorAtom* color() const { return m_colorAtom; }
+    SurfaceMolecule* surface() const { return m_surfaceMolecule; }
+    FontMolecule* font() const { return m_fontMolecule; }
+    BorderMolecule* border() const { return m_borderMolecule; }
+    
+    // Gestion du thème
     QString currentTheme() const { return m_currentTheme; }
-    void setCurrentTheme(const QString &theme);
+    void setCurrentTheme(const QString& theme);
     
-    QStringList availableThemes() const { return m_availableThemes; }
+    QStringList availableThemes() const;
     
-    // Getters for properties
-    QColor background() const { return getColor("background"); }
-    QColor surface() const { return getColor("surface"); }
-    QColor surfaceHover() const { return getColor("surfaceHover"); }
-    QColor primary() const { return getColor("primary"); }
-    QColor primaryHover() const { return getColor("primaryHover"); }
-    QColor text() const { return getColor("text"); }
-    QColor textSecondary() const { return getColor("textSecondary"); }
-    QColor border() const { return getColor("border"); }
-    QColor accent() const { return getColor("accent"); }
-    QColor error() const { return getColor("error"); }
-    QColor success() const { return getColor("success"); }
-    QColor warning() const { return getColor("warning"); }
+    qreal scale() const { return m_scale; }
+    void setScale(qreal s);
     
-    int menuBarHeight() const { return getInt("menuBarHeight"); }
-    int spacing() const { return getInt("spacing"); }
-    int spacingSmall() const { return getInt("spacingSmall"); }
-    int spacingLarge() const { return getInt("spacingLarge"); }
-    int radius() const { return getInt("radius"); }
-    int radiusSmall() const { return getInt("radiusSmall"); }
-    int radiusLarge() const { return getInt("radiusLarge"); }
-    int borderWidth() const { return getInt("borderWidth"); }
-    int animationDuration() const { return getInt("animationDuration"); }
+    // Import/Export (optionnel, pour partager des thèmes)
+    Q_INVOKABLE bool exportToJson(const QString& filePath) const;
+    Q_INVOKABLE bool importFromJson(const QString& filePath);
     
-    int fontSizeSmall() const { return getInt("fontSizeSmall"); }
-    int fontSizeMedium() const { return getInt("fontSizeMedium"); }
-    int fontSizeLarge() const { return getInt("fontSizeLarge"); }
-    int fontSizeTitle() const { return getInt("fontSizeTitle"); }
+    // Preview pour le sélecteur
+    Q_INVOKABLE QColor getThemePreviewPrimary(const QString& themeName) const;
+    Q_INVOKABLE QColor getThemePreviewBackground(const QString& themeName) const;
     
-    // Methods callable from QML
-    Q_INVOKABLE QVariantMap getAllProperties() const;
-    Q_INVOKABLE QVariant getProperty(const QString &key) const;
-    Q_INVOKABLE void setProperty(const QString &key, const QVariant &value);
-    Q_INVOKABLE void resetProperty(const QString &key);
-    Q_INVOKABLE void resetAllProperties();
-    Q_INVOKABLE bool isPropertyModified(const QString &key) const;
-    Q_INVOKABLE QVariant getOriginalValue(const QString &key) const;
-    
-    Q_INVOKABLE bool importTheme(const QString &filePath);
-    Q_INVOKABLE bool exportTheme(const QString &filePath) const;
-    
-    Q_INVOKABLE QString getPropertyType(const QString &key) const;
-    
-    Q_INVOKABLE QColor getThemePreviewBackground(const QString &themeName) const;
-    Q_INVOKABLE QColor getThemePreviewPrimary(const QString &themeName) const;
+    // Reset
+    Q_INVOKABLE void resetToDefaults();
 
 signals:
     void currentThemeChanged();
-    void themePropertiesChanged();
-    void availableThemesChanged();
+    void scaleChanged();
 
 private:
-    void loadDefaultTheme();
-    void loadTheme(const QString &themeName);
-    void loadUserOverrides();
-    void saveUserOverrides();
-    void discoverThemes();
-    QVariantMap mergeThemes(const QVariantMap &base, const QVariantMap &override) const;
+    explicit ThemeManager(QObject *parent = nullptr);
+    ~ThemeManager() = default;
+    ThemeManager(const ThemeManager&) = delete;
+    ThemeManager& operator=(const ThemeManager&) = delete;
     
-    QColor getColor(const QString &key) const;
-    int getInt(const QString &key) const;
+    void loadSavedSettings();
+    void saveSettings();
     
-    // Méthodes pour normaliser et comparer les valeurs
-    QVariant normalizeValue(const QVariant &value) const;
-    bool valuesAreEqual(const QVariant &v1, const QVariant &v2) const;
+    QString m_currentTheme{"Dark"};
+    qreal m_scale{1.0};
     
-    QString m_currentTheme;
-    QStringList m_availableThemes;
-    QVariantMap m_defaultTheme;
-    QVariantMap m_currentThemeBase;
-    QVariantMap m_userOverrides;
-    QVariantMap m_effectiveTheme;
+    // Atomes (primitives)
+    ColorAtom* m_colorAtom;
+    SizeAtom* m_sizeAtom;
+    WeightAtom* m_weightAtom;
+    
+    // Molécules (groupes sémantiques)
+    SurfaceMolecule* m_surfaceMolecule;
+    FontMolecule* m_fontMolecule;
+    BorderMolecule* m_borderMolecule;
 };
 
 #endif // THEMEMANAGER_H
+
+
+// #include <QObject>
+// #include <QString>
+// #include <QStringList>
+// #include "core/theme/common/ThemePalette.h"
+// #include "core/theme/common/ThemeSizes.h"
+// #include "core/theme/components/ComponentStyles.h"
+
+
+// class ThemeManager : public QObject {
+//     Q_OBJECT
+    
+//     // Exposition hiérarchique vers QML
+//     Q_PROPERTY(ThemePalette* colors READ colors CONSTANT)
+//     Q_PROPERTY(ThemeSizes* sizes READ sizes CONSTANT)
+    
+//     // Composants
+//     Q_PROPERTY(PreferencesWindowStyle* prefWindow READ prefWindow CONSTANT)
+//     Q_PROPERTY(MenuBarStyle* menuBar READ menuBar CONSTANT)
+//     Q_PROPERTY(ButtonStyle* button READ button CONSTANT)
+    
+//     // Thème et scale
+//     Q_PROPERTY(QString currentTheme READ currentTheme WRITE setCurrentTheme NOTIFY currentThemeChanged)
+//     Q_PROPERTY(QStringList availableThemes READ availableThemes NOTIFY availableThemesChanged)
+//     Q_PROPERTY(qreal scale READ scale WRITE setScale NOTIFY scaleChanged)
+
+// public:
+//     static ThemeManager& instance();
+    
+//     // Accès aux sous-systèmes
+//     ThemePalette* colors() const { return m_colors; }
+//     ThemeSizes* sizes() const { return m_sizes; }
+    
+//     // Accès aux composants
+//     PreferencesWindowStyle* prefWindow() const { return m_prefWindow; }
+//     MenuBarStyle* menuBar() const { return m_menuBar; }
+//     ButtonStyle* button() const { return m_button; }
+    
+//     // Thème et scale
+//     QString currentTheme() const { return m_currentTheme; }
+//     void setCurrentTheme(const QString& theme);
+    
+//     QStringList availableThemes() const { return m_availableThemes; }
+    
+//     qreal scale() const { return m_scale; }
+//     void setScale(qreal s);
+    
+//     // Sauvegarde/Chargement
+//     Q_INVOKABLE bool loadTheme(const QString& themeName);
+//     Q_INVOKABLE bool saveTheme(const QString& themeName);
+//     Q_INVOKABLE bool importTheme(const QString& filePath);
+//     Q_INVOKABLE bool exportTheme(const QString& filePath);
+    
+//     // Reset
+//     Q_INVOKABLE void resetAllToDefaults();
+//     Q_INVOKABLE void resetComponentsToDefaults();
+    
+//     // Preview (pour ThemeSelector)
+//     Q_INVOKABLE QColor getThemePreviewPrimary(const QString& themeName) const;
+//     Q_INVOKABLE QColor getThemePreviewBackground(const QString& themeName) const;
+
+// signals:
+//     void currentThemeChanged();
+//     void scaleChanged();
+//     void availableThemesChanged();
+
+// private:
+//     explicit ThemeManager(QObject *parent = nullptr);
+//     ~ThemeManager() = default;
+//     ThemeManager(const ThemeManager&) = delete;
+//     ThemeManager& operator=(const ThemeManager&) = delete;
+    
+//     void discoverThemes();
+//     void loadUserOverrides();
+//     void saveUserOverrides();
+    
+//     QString m_currentTheme{"dark"};
+//     QStringList m_availableThemes;
+//     qreal m_scale{1.0};
+    
+//     // Sous-systèmes
+//     ThemePalette* m_colors;
+//     ThemeSizes* m_sizes;
+    
+//     // Composants
+//     PreferencesWindowStyle* m_prefWindow;
+//     MenuBarStyle* m_menuBar;
+//     ButtonStyle* m_button;
+// };
+
+// #endif // THEMEMANAGER_NEW_H

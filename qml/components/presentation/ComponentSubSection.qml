@@ -31,8 +31,8 @@ Item {
             
             RowLayout {
                 anchors.fill: parent
-                anchors.leftMargin: ThemeManager.spacing + root.indentSize
-                anchors.rightMargin: ThemeManager.spacing
+                anchors.leftMargin: ThemeManager.spacingMedium + root.indentSize
+                anchors.rightMargin: ThemeManager.spacingMedium
                 spacing: 8
                 
                 // Chevron icon
@@ -48,7 +48,7 @@ Item {
                             icon.source: root.collapsed ? "qrc:/resources/icons/chevron-right.svg" : "qrc:/resources/icons/chevron-down.svg"
                             icon.width: 10
                             icon.height: 10
-                            icon.color: ThemeManager.text
+                            icon.color: ThemeManager.textPrimary
                             enabled: false
                         }
                     }
@@ -59,7 +59,7 @@ Item {
                     Layout.fillWidth: true
                     text: root.title
                     font.pixelSize: ThemeManager.fontSizeMedium
-                    color: ThemeManager.text
+                    color: ThemeManager.textPrimary
                 }
             }
         }
@@ -67,10 +67,10 @@ Item {
         // Content container
         Item {
             Layout.fillWidth: true
-            Layout.preferredHeight: root.collapsed ? 0 : (contentContainer.implicitHeight + ThemeManager.spacing * 2)
-            Layout.leftMargin: ThemeManager.borderWidth
-            Layout.rightMargin: ThemeManager.borderWidth
-            Layout.bottomMargin: ThemeManager.borderWidth
+            Layout.preferredHeight: root.collapsed ? 0 : (contentContainer.implicitHeight + ThemeManager.spacingMedium * 2)
+            Layout.leftMargin: ThemeManager.borderThin
+            Layout.rightMargin: ThemeManager.borderThin
+            Layout.bottomMargin: ThemeManager.borderThin
             clip: true
             visible: !root.collapsed
             
@@ -78,18 +78,18 @@ Item {
                 id: contentBg
                 width: parent.width
                 height: parent.height
-                color: ThemeManager.background
-                bottomLeftRadius: ThemeManager.radius
-                bottomRightRadius: ThemeManager.radius
+                color: ThemeManager.backgroundPrimary
+                bottomLeftRadius: ThemeManager.radiusMedium
+                bottomRightRadius: ThemeManager.radiusMedium
                 
                 ColumnLayout {
                     id: contentContainer
-                    width: parent.width - (root.indentSize + ThemeManager.spacing) - ThemeManager.spacing
+                    width: parent.width - (root.indentSize + ThemeManager.spacingMedium) - ThemeManager.spacingMedium
                     anchors.left: parent.left
-                    anchors.leftMargin: root.indentSize + ThemeManager.spacing
+                    anchors.leftMargin: root.indentSize + ThemeManager.spacingMedium
                     anchors.top: parent.top
                     anchors.topMargin: ThemeManager.spacingSmall
-                    spacing: ThemeManager.spacing
+                    spacing: ThemeManager.spacingMedium
                 }
             }
         }

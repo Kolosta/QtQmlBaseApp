@@ -24,7 +24,7 @@ Dialog {
 
     default property alias body: contentContainer.data
     
-    property color borderFlashColor: ThemeManager.accent
+    property color borderFlashColor: ThemeManager.colors.accentBase
     property real borderFlashOpacity: 0.0
     property bool allowClose: false
 
@@ -99,12 +99,12 @@ Dialog {
     // Arrière-plan avec bordure qui clignote
     background: Rectangle {
         id: bgRect
-        color: ThemeManager.surface
-        radius: ThemeManager.radius
+        color: ThemeManager.colors.surfacePrimary
+        radius: ThemeManager.sizes.radiusMedium
         
         // Bordure normale
-        border.width: ThemeManager.borderWidth
-        border.color: ThemeManager.border
+        border.width: ThemeManager.sizes.borderThin
+        border.color: ThemeManager.colors.borderPrimary
         
         // Bordure de flash par-dessus
         Rectangle {
@@ -146,9 +146,9 @@ Dialog {
 
         Text {
             text: root.dialogTitle
-            font.pixelSize: ThemeManager.fontSizeMedium
+            font.pixelSize: ThemeManager.sizes.fontMedium
             font.bold: true
-            color: ThemeManager.text
+            color: ThemeManager.colors.textPrimary
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignLeft
         }
@@ -161,9 +161,9 @@ Dialog {
             Text {
                 visible: root.text !== ""
                 text: root.text
-                color: ThemeManager.text
+                color: ThemeManager.colors.textPrimary
                 wrapMode: Text.WordWrap
-                font.pixelSize: ThemeManager.fontSizeSmall
+                font.pixelSize: ThemeManager.sizes.fontSmall
                 Layout.fillWidth: true
             }
         }
@@ -181,14 +181,14 @@ Dialog {
                 onClicked: root.rejectDialog()
                 
                 background: Rectangle {
-                    color: parent.pressed ? ThemeManager.surfaceHover : ThemeManager.surface
-                    border.width: ThemeManager.borderWidth
-                    border.color: ThemeManager.border
-                    radius: ThemeManager.radiusSmall
+                    color: parent.pressed ? ThemeManager.colors.surfaceHover : ThemeManager.colors.surfacePrimary
+                    border.width: ThemeManager.sizes.borderThin
+                    border.color: ThemeManager.colors.borderPrimary
+                    radius: ThemeManager.sizes.radiusSmall
                 }
                 contentItem: Text {
                     text: parent.text
-                    color: ThemeManager.text
+                    color: ThemeManager.colors.textPrimary
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                 }
@@ -199,8 +199,8 @@ Dialog {
                 onClicked: root.acceptDialog()
 
                 background: Rectangle {
-                    color: parent.pressed ? ThemeManager.primaryHover : ThemeManager.primary
-                    radius: ThemeManager.radiusSmall
+                    color: parent.pressed ? ThemeManager.colors.primaryHover : ThemeManager.colors.primaryBase
+                    radius: ThemeManager.sizes.radiusSmall
                 }
                 contentItem: Text {
                     text: parent.text

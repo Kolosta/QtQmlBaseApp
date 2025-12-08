@@ -1,12 +1,26 @@
 {
   "name": "Arctic",
-  "background": "#e8f4f8",
-  "surface": "#f0f8fa",
-  "surfaceHover": "#d9eff5",
-  "primary": "#006494",
-  "primaryHover": "#0077b6",
-  "text": "#001f3f",
-  "textSecondary": "#4a7c8c",
-  "border": "#b8d8e0",
-  "accent": "#0096c7"
+  "colors": {
+    "background": {
+      "primary": "#e8f4f8"
+    },
+    "surface": {
+      "primary": "#f0f8fa",
+      "hover": "#d9eff5"
+    },
+    "primary": {
+      "base": "#006494",
+      "hover": "#0077b6"
+    },
+    "text": {
+      "primary": "#001f3f",
+      "secondary": "#4a7c8c"
+    },
+    "border": {
+      "primary": "#b8d8e0"
+    },
+    "accent": {
+      "base": "#0096c7"
+    }
+  }
 }

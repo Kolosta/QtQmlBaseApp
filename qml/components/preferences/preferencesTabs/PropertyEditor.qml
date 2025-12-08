@@ -39,7 +39,7 @@ Rectangle {
         Text {
             Layout.preferredWidth: 150
             text: root.propertyLabel
-            color: root.isModified ? ThemeManager.accent : ThemeManager.text
+            color: root.isModified ? ThemeManager.accentBase : ThemeManager.textPrimary
             font.pixelSize: ThemeManager.fontSizeMedium
             font.bold: root.isModified
             elide: Text.ElideRight
@@ -68,15 +68,15 @@ Rectangle {
             visible: root.isModified
             
             background: Rectangle {
-                color: parent.hovered ? ThemeManager.surfaceHover : ThemeManager.surface
-                border.width: ThemeManager.borderWidth
-                border.color: ThemeManager.border
+                color: parent.hovered ? ThemeManager.surfaceHover : ThemeManager.surfacePrimary
+                border.width: ThemeManager.borderThin
+                border.color: ThemeManager.borderPrimary
                 radius: ThemeManager.radiusSmall
             }
             
             contentItem: Text {
                 text: parent.text
-                color: ThemeManager.text
+                color: ThemeManager.textPrimary
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 font.pixelSize: ThemeManager.fontSizeLarge
@@ -101,8 +101,8 @@ Rectangle {
                 width: 60
                 height: 30
                 color: root.propertyValue || "#000000"
-                border.width: ThemeManager.borderWidth
-                border.color: ThemeManager.border
+                border.width: ThemeManager.borderThin
+                border.color: ThemeManager.borderPrimary
                 radius: ThemeManager.radiusSmall
                 
                 MouseArea {
@@ -121,13 +121,13 @@ Rectangle {
                 font.pixelSize: ThemeManager.fontSizeSmall
                 
                 background: Rectangle {
-                    color: ThemeManager.surface
-                    border.width: ThemeManager.borderWidth
-                    border.color: ThemeManager.border
+                    color: ThemeManager.surfacePrimary
+                    border.width: ThemeManager.borderThin
+                    border.color: ThemeManager.borderPrimary
                     radius: ThemeManager.radiusSmall
                 }
                 
-                color: ThemeManager.text
+                color: ThemeManager.textPrimary
                 
                 onEditingFinished: {
                     if (text.match(/^#[0-9A-Fa-f]{6}$/)) {
@@ -220,23 +220,22 @@ Rectangle {
                 implicitWidth: 20
                 implicitHeight: 20
                 radius: ThemeManager.radiusSmall
-                border.width: ThemeManager.borderWidth
-                border.color: ThemeManager.border
-                color: ThemeManager.surface
-                
+                border.width: ThemeManager.borderThin
+                border.color: ThemeManager.borderPrimary
+                color: ThemeManager.surfacePrimary                
                 Rectangle {
                     width: 12
                     height: 12
                     anchors.centerIn: parent
                     radius: ThemeManager.radiusSmall
-                    color: ThemeManager.accent
+                    color: ThemeManager.accentBase
                     visible: parent.parent.checked
                 }
             }
             
             contentItem: Text {
                 text: parent.checked ? "Yes" : "No"
-                color: ThemeManager.text
+                color: ThemeManager.textPrimary
                 leftPadding: parent.indicator.width + 5
                 verticalAlignment: Text.AlignVCenter
             }
@@ -257,13 +256,13 @@ Rectangle {
             font.pixelSize: ThemeManager.fontSizeMedium
             
             background: Rectangle {
-                color: ThemeManager.surface
-                border.width: ThemeManager.borderWidth
-                border.color: ThemeManager.border
+                color: ThemeManager.surfacePrimary
+                border.width: ThemeManager.borderThin
+                border.color: ThemeManager.borderPrimary
                 radius: ThemeManager.radiusSmall
             }
             
-            color: ThemeManager.text
+            color: ThemeManager.textPrimary
             
             onEditingFinished: {
                 root.valueChanged(text)
@@ -277,7 +276,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         width: parent.width
         height: 1
-        color: ThemeManager.border
+        color: ThemeManager.borderPrimary
         opacity: 0.3
     }
 }
